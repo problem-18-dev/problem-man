@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dl671bnuld1gt"]
+
+[ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_yu7o2"]
+
+[sub_resource type="Gradient" id="Gradient_fngwq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.9882353, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yu7o2"]
+gradient = SubResource("Gradient_fngwq")
+width = 16
+
+[node name="Chaser" unique_id=1086585638 instance=ExtResource("1_yu7o2")]
+
+[node name="NavPreviewLine" parent="." index="0" unique_id=780997796]
+default_color = Color(0.9882353, 0, 0, 1)
+
+[node name="Sprite" parent="." index="1" unique_id=531749497]
+texture = SubResource("GradientTexture1D_yu7o2")

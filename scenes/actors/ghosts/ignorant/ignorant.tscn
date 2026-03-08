@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cxgwfqxupdeef"]
+
+[ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_vi7wx"]
+[ext_resource type="Script" uid="uid://cc57l2n1jq0ja" path="res://scenes/actors/ghosts/ignorant/ignorant.gd" id="2_c6uw6"]
+
+[sub_resource type="Gradient" id="Gradient_vi7wx"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0.40392157, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_c6uw6"]
+gradient = SubResource("Gradient_vi7wx")
+width = 16
+
+[node name="Ignorant" unique_id=1086585638 instance=ExtResource("1_vi7wx")]
+script = ExtResource("2_c6uw6")
+
+[node name="NavPreviewLine" parent="." index="0" unique_id=780997796]
+default_color = Color(1, 0.40392157, 0, 1)
+
+[node name="Sprite" parent="." index="1" unique_id=531749497]
+texture = SubResource("GradientTexture1D_c6uw6")

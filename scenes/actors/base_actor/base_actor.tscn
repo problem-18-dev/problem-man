@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://grdkhay2j7sh"]
+
+[ext_resource type="Script" uid="uid://bek8066gcl71s" path="res://scenes/actors/base_actor/base_actor.gd" id="1_fngwq"]
+
+[node name="BaseActor" type="CharacterBody2D" unique_id=205406642]
+script = ExtResource("1_fngwq")

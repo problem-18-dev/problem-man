@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bm8sl7uj46tea"]
+
+[ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_w1oms"]
+
+[node name="Fickle" unique_id=1086585638 instance=ExtResource("1_w1oms")]

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://lt06bm8cwm7o"]
+
+[ext_resource type="Script" uid="uid://dh2lur6087ntr" path="res://scenes/actors/ghosts/ghost/ghost.gd" id="1_dy8p8"]
+
+[sub_resource type="Gradient" id="Gradient_fngwq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.9882353, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2hoxp"]
+gradient = SubResource("Gradient_fngwq")
+width = 16
+
+[node name="Ghost" type="CharacterBody2D" unique_id=1086585638]
+script = ExtResource("1_dy8p8")
+
+[node name="NavPreviewLine" type="Line2D" parent="." unique_id=780997796]
+top_level = true
+width = 4.0
+default_color = Color(0.20061406, 0.50245774, 1, 1)
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=531749497]
+scale = Vector2(1, 16)
+texture = SubResource("GradientTexture1D_2hoxp")
+
+[node name="Timer" type="Timer" parent="." unique_id=532189563]
+wait_time = 0.25
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668550691]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

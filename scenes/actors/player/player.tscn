@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dvuo38cya8due"]
+
+[ext_resource type="Texture2D" uid="uid://cklv4hv1j6gli" path="res://scenes/actors/player/sprites/player.png" id="1_8afob"]
+[ext_resource type="Script" uid="uid://ewxdr24cpxrd" path="res://scenes/actors/player/player.gd" id="1_dovo2"]
+[ext_resource type="Texture2D" uid="uid://dbnibyfduyr26" path="res://scenes/actors/player/sprites/player_direction_arrow.png" id="3_gmlin"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8afob"]
+radius = 7.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1813718993 groups=["player"]]
+collision_mask = 8
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_dovo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1285943555]
+shape = SubResource("CircleShape2D_8afob")
+
+[node name="Sprites" type="Node2D" parent="." unique_id=605879473]
+
+[node name="PlayerSprite" type="Sprite2D" parent="Sprites" unique_id=1412567245]
+texture = ExtResource("1_8afob")
+
+[node name="DirectionSprite" type="Sprite2D" parent="Sprites" unique_id=354957197]
+texture = ExtResource("3_gmlin")
+offset = Vector2(8, 0)
