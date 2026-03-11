@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://bnl5bti43bjip"]
 
 [ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_vjx0v"]
-[ext_resource type="Script" uid="uid://c4pb315s002w8" path="res://scenes/actors/ghosts/ambusher/ambusher.gd" id="2_k8xpk"]
+[ext_resource type="Script" uid="uid://6taodusityab" path="res://scenes/actors/ghosts/ambusher/states/ambusher_scatter.gd" id="3_ngau7"]
+[ext_resource type="Script" uid="uid://1vc6lspw65wa" path="res://scenes/actors/ghosts/ambusher/states/ambusher_chase.gd" id="3_wdvf0"]
+[ext_resource type="Script" uid="uid://bi4y0w2v8qdqf" path="res://scenes/actors/ghosts/ambusher/states/ambusher_frightened.gd" id="4_ngau7"]
+[ext_resource type="Script" uid="uid://dnpjs2poodcjy" path="res://scenes/actors/ghosts/ambusher/states/ambusher_eaten.gd" id="5_yieru"]
 
 [sub_resource type="Gradient" id="Gradient_k8xpk"]
 offsets = PackedFloat32Array(0)
@@ -12,10 +15,31 @@ gradient = SubResource("Gradient_k8xpk")
 width = 16
 
 [node name="Ambusher" unique_id=1086585638 instance=ExtResource("1_vjx0v")]
-script = ExtResource("2_k8xpk")
 
 [node name="NavPreviewLine" parent="." index="0" unique_id=780997796]
 default_color = Color(1, 0.4755782, 0.87762594, 1)
 
 [node name="Sprite" parent="." index="1" unique_id=531749497]
 texture = SubResource("GradientTexture1D_vjx0v")
+
+[node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Chase")
+
+[node name="Chase" parent="StateMachine" index="0" unique_id=858192397]
+script = ExtResource("3_wdvf0")
+
+[node name="UpdateTimer" parent="StateMachine/Chase" index="0" unique_id=928845767]
+wait_time = 0.25
+
+[node name="Scatter" parent="StateMachine" index="1" unique_id=949127239]
+script = ExtResource("3_ngau7")
+
+[node name="UpdateTimer" type="Timer" parent="StateMachine/Scatter" index="0" unique_id=339106283]
+
+[node name="Frightened" parent="StateMachine" index="2" unique_id=1799767154]
+script = ExtResource("4_ngau7")
+
+[node name="Eaten" parent="StateMachine" index="3" unique_id=1008001944]
+script = ExtResource("5_yieru")
+
+[connection signal="timeout" from="StateMachine/Scatter/UpdateTimer" to="StateMachine/Scatter" method="_on_update_timer_timeout"]

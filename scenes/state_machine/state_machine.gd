@@ -2,24 +2,29 @@ class_name StateMachine
 extends Node
 
 
-@export_category("Initial values")
 @export var initial_state: State
 
-var state: State = initial_state
-var states: Dictionary[String, State]
+@onready var state := initial_state
 
 
 func _ready() -> void:
-	for child in get_children():
-		if child is State:
-			states[child.name.to_lower()] = child
-			child.state_machine = self
+	assert(initial_state, "No initial state given.")
+	
+	var children = find_children("*", "State") as Array[State]
+	for state_node: State in children:
+		state_node.finished.connect(_transition_to_next_state)
+	
+	await owner.ready
+	state.enter()
 
 
-func change_state(new_state: String) -> void:
-	var state_to_enter = states[new_state.to_lower()]
-	assert(state_to_enter, "Transitioning to %s, but it doesn't exist" % new_state)
+func _physics_process(delta: float) -> void:
+	state.physics_update(delta)
+
+
+func _transition_to_next_state(next_state: String, data := {}) -> void:
+	assert(has_node(next_state), "Transitioning to state %s, but it doesn't exist" % next_state)
 	
 	state.exit()
-	state = state_to_enter
-	state.enter()
+	state = get_node(next_state)
+	state.enter(data)

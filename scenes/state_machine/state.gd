@@ -2,12 +2,16 @@ class_name State
 extends Node
 
 
-var state_machine: StateMachine
+signal finished(next_state_path: String, data: Dictionary)
 
 
-func enter() -> void:
+func enter(data := {}) -> void:
 	pass
 
 
 func exit() -> void:
+	pass
+
+
+func physics_update(delta: float) -> void:
 	pass

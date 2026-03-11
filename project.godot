@@ -23,14 +23,23 @@ config/icon="res://icon.svg"
 
 general/default_playback_type.web=0
 
+[autoload]
+
+NavigationManager="*uid://dt1u2n0bp2a1b"
+EventBus="*uid://drkpratwswvbw"
+
 [display]
 
-window/size/viewport_width=512
-window/size/viewport_height=512
+window/size/viewport_width=448
+window/size/viewport_height=496
 window/size/window_width_override=1024
 window/size/window_height_override=1024
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 [input]
 
@@ -78,5 +87,5 @@ renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/size/window_height_override=1280
 textures/size/window_width_override=1280
-textures/size/viewport_height=640
-textures/size/viewport_width=640
+textures/size/viewport_height=512
+textures/size/viewport_width=512

@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bm8sl7uj46tea"]
+
+[ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_vxxy4"]
+[ext_resource type="Script" uid="uid://btr1c5nixerj5" path="res://scenes/actors/ghosts/fickle/fickle.gd" id="2_clfb4"]
+
+[sub_resource type="Gradient" id="Gradient_vxxy4"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.15693057, 0.50624835, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_clfb4"]
+gradient = SubResource("Gradient_vxxy4")
+width = 16
+
+[node name="Fickle" unique_id=1086585638 instance=ExtResource("1_vxxy4")]
+script = ExtResource("2_clfb4")
+
+[node name="NavPreviewLine" parent="." index="0" unique_id=780997796]
+default_color = Color(0.15693057, 0.50624835, 1, 1)
+
+[node name="Sprite" parent="." index="1" unique_id=531749497]
+texture = SubResource("GradientTexture1D_clfb4")

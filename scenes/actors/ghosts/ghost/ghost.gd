@@ -1,76 +1,69 @@
 class_name Ghost
-extends BaseActor
+extends CharacterBody2D
 
-
-enum ScatterCorner { TOP_LEFT, TOP_RIGHT, BOTTOM_LEFT, BOTTOM_RIGHT }
 
 @export_category("Stats")
 @export var speed := 125.0
 
-var corners: Dictionary[ScatterCorner, Vector2i] = {
-	ScatterCorner.TOP_LEFT: Vector2(1, 1),
-	ScatterCorner.TOP_RIGHT: Vector2(27, 1),
-	ScatterCorner.BOTTOM_LEFT: Vector2(1, 27),
-	ScatterCorner.BOTTOM_RIGHT: Vector2(27, 27)
-}
-
-var _move_pointer: int
-var _current_cell: Vector2
-var _target_cell: Vector2
-var _move_points: PackedVector2Array
-var _player: Player
+var move_pointer := 0
+var move_points: PackedVector2Array
+var player: Player
 
 @onready var nav_preview_line: Line2D = $NavPreviewLine
 
 
 func _ready() -> void:
-	super()
-	_get_player()
-	_start()
+	player = get_tree().get_first_node_in_group("player")
 
 
-func _physics_process(delta: float) -> void:
-	if _move_points.size() <= 0:
+func navigate() -> void:
+	if move_points.size() <= 0:
 		return
 	
-	if _move_pointer == _move_points.size():
+	if move_pointer == move_points.size() - 1:
+		position = move_points[-1]
 		return
 	
-	var next_position := _move_points[_move_pointer]
+	var next_position := move_points[move_pointer + 1]
 	var direction := (next_position - position).normalized()
-	position += direction * speed * delta
+	position += direction * speed * get_physics_process_delta_time()
 	
-	if position.distance_to(next_position) < 1:
+	if position.distance_to(next_position) < speed / 100:
 		position = next_position
-		_move_pointer += 1
+		move_pointer += 1
 
 
-func _start() -> void:
-	_current_cell = _maze.position_to_cell(position)
-	_target_cell = _maze.position_to_cell(_player.position)
-	_move_points = _maze.get_move_points(_current_cell, _target_cell)
-	nav_preview_line.points = _move_points
+func escape_from_player() -> void:
+	var current_cell := NavigationManager.position_to_cell(position)
+	var player_cell := NavigationManager.position_to_cell(player.get_position())
+	var escape_cell := (player_cell - current_cell) * -1
+	var new_move_points := NavigationManager.get_move_points(current_cell, escape_cell)
+	move_points = new_move_points
+	nav_preview_line.points = new_move_points
 
 
-func _update_navigation() -> void:
-	_update_own_position()
-	_update_pathing()
+func go_to_jail(jail_cell: Vector2) -> void:
+	var current_cell := NavigationManager.position_to_cell(position)
+	var new_move_points := NavigationManager.get_move_points(current_cell, jail_cell)
+	move_points = new_move_points
+	nav_preview_line.points = new_move_points
 
 
-func _update_own_position() -> void:
-	_current_cell = _maze.position_to_cell(position)
-	_move_pointer = 0
+func _on_chase_pressed() -> void:
+	$StateMachine._transition_to_next_state("Chase")
+	$CanvasLayer/Label.text = "State: Chase"
 
 
-func _update_pathing() -> void:
-	_target_cell = _maze.position_to_cell(_player.position)
-	_move_points = _maze.get_move_points(_current_cell, _target_cell)
-	nav_preview_line.points = _move_points
+func _on_scatter_pressed() -> void:
+	$StateMachine._transition_to_next_state("Scatter")
+	$CanvasLayer/Label.text = "State: Scatter"
 
 
-func _get_player() -> void:
-	_player = get_tree().get_first_node_in_group("player")
+func _on_frightened_pressed() -> void:
+	$StateMachine._transition_to_next_state("Frightened")
+	$CanvasLayer/Label.text = "State: Frightened"
 
 
-func _on_timer_timeout() -> void:
-	_update_navigation()
+func _on_eaten_pressed() -> void:
+	$StateMachine._transition_to_next_state("Eaten")
+	$CanvasLayer/Label.text = "State: Eaten"

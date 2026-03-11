@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://lt06bm8cwm7o"]
 
 [ext_resource type="Script" uid="uid://dh2lur6087ntr" path="res://scenes/actors/ghosts/ghost/ghost.gd" id="1_dy8p8"]
+[ext_resource type="PackedScene" uid="uid://bv57113kyh2ga" path="res://scenes/state_machine/state_machine.tscn" id="2_lrge8"]
 
 [sub_resource type="Gradient" id="Gradient_fngwq"]
 offsets = PackedFloat32Array(0)
@@ -22,10 +23,17 @@ default_color = Color(0.20061406, 0.50245774, 1, 1)
 scale = Vector2(1, 16)
 texture = SubResource("GradientTexture1D_2hoxp")
 
-[node name="Timer" type="Timer" parent="." unique_id=532189563]
-wait_time = 0.25
-autostart = true
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668550691]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="StateMachine" parent="." unique_id=1128070307 instance=ExtResource("2_lrge8")]
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=858192397]
+
+[node name="UpdateTimer" type="Timer" parent="StateMachine/Chase" unique_id=928845767]
+wait_time = 0.25
+
+[node name="Scatter" type="Node" parent="StateMachine" unique_id=949127239]
+
+[node name="Frightened" type="Node" parent="StateMachine" unique_id=1799767154]
+
+[node name="Eaten" type="Node" parent="StateMachine" unique_id=1008001944]

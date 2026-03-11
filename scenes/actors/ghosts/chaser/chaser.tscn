@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://dl671bnuld1gt"]
 
 [ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_yu7o2"]
+[ext_resource type="Script" uid="uid://rk08rda6o1j6" path="res://scenes/actors/ghosts/chaser/states/chaser_chase.gd" id="2_rwdam"]
+[ext_resource type="Script" uid="uid://e8vwef8uny6b" path="res://scenes/actors/ghosts/chaser/states/chaser_scatter.gd" id="3_45bs7"]
+[ext_resource type="Script" uid="uid://ct316a1oxscl0" path="res://scenes/actors/ghosts/chaser/states/chaser_frightened.gd" id="4_cmls4"]
+[ext_resource type="Script" uid="uid://bovafpqs3tguy" path="res://scenes/actors/ghosts/chaser/states/chaser_eaten.gd" id="5_eefqh"]
 
 [sub_resource type="Gradient" id="Gradient_fngwq"]
 offsets = PackedFloat32Array(0)
@@ -17,3 +21,55 @@ default_color = Color(0.9882353, 0, 0, 1)
 
 [node name="Sprite" parent="." index="1" unique_id=531749497]
 texture = SubResource("GradientTexture1D_yu7o2")
+
+[node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
+initial_state = NodePath("Eaten")
+
+[node name="Chase" parent="StateMachine" index="0" unique_id=858192397]
+script = ExtResource("2_rwdam")
+
+[node name="Scatter" parent="StateMachine" index="1" unique_id=949127239]
+script = ExtResource("3_45bs7")
+
+[node name="Frightened" parent="StateMachine" index="2" unique_id=1799767154]
+script = ExtResource("4_cmls4")
+
+[node name="Eaten" parent="StateMachine" index="3" unique_id=1008001944]
+script = ExtResource("5_eefqh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4" unique_id=1048616046]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" index="0" unique_id=264497589]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 100.0
+offset_bottom = 144.0
+
+[node name="Chase" type="Button" parent="CanvasLayer/VBoxContainer" index="0" unique_id=629187506]
+layout_mode = 2
+text = "Chase"
+
+[node name="Scatter" type="Button" parent="CanvasLayer/VBoxContainer" index="1" unique_id=250288037]
+layout_mode = 2
+text = "Scatter"
+
+[node name="Frightened" type="Button" parent="CanvasLayer/VBoxContainer" index="2" unique_id=651915478]
+layout_mode = 2
+text = "Frightened"
+
+[node name="Eaten" type="Button" parent="CanvasLayer/VBoxContainer" index="3" unique_id=494711620]
+layout_mode = 2
+text = "Eaten"
+
+[node name="Label" type="Label" parent="CanvasLayer" index="1" unique_id=1979743049]
+offset_left = 120.0
+offset_top = 8.0
+offset_right = 226.0
+offset_bottom = 31.0
+text = "State: Eaten"
+
+[connection signal="timeout" from="StateMachine/Chase/UpdateTimer" to="StateMachine/Chase" method="_on_update_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Chase" to="." method="_on_chase_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Scatter" to="." method="_on_scatter_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Frightened" to="." method="_on_frightened_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Eaten" to="." method="_on_eaten_pressed"]

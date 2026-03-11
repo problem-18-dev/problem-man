@@ -21,6 +21,12 @@ shape = SubResource("CircleShape2D_8afob")
 [node name="PlayerSprite" type="Sprite2D" parent="Sprites" unique_id=1412567245]
 texture = ExtResource("1_8afob")
 
+[node name="TwoStepAheadMarker" type="Marker2D" parent="Sprites/PlayerSprite" unique_id=1171790005]
+position = Vector2(32, 0)
+
+[node name="FourStepAheadMarker" type="Marker2D" parent="Sprites/PlayerSprite" unique_id=728861076]
+position = Vector2(64, 0)
+
 [node name="DirectionSprite" type="Sprite2D" parent="Sprites" unique_id=354957197]
 texture = ExtResource("3_gmlin")
 offset = Vector2(8, 0)

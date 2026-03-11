@@ -1,11 +1,13 @@
 class_name Player
-extends BaseActor
+extends CharacterBody2D
 
 
 const CELL_SIZE := 16
 
 @export_category("Stats")
 @export var speed := 125.0
+@export_category("Maze")
+@export var maze: Maze
 
 var _direction := Vector2.RIGHT
 var _next_direction := _direction
@@ -18,10 +20,12 @@ var _available_directions := {
 
 @onready var player_sprite: Sprite2D = $Sprites/PlayerSprite
 @onready var direction_sprite: Sprite2D = $Sprites/DirectionSprite
+@onready var two_step_ahead_marker: Marker2D = $Sprites/PlayerSprite/TwoStepAheadMarker
+@onready var four_step_ahead_marker: Marker2D = $Sprites/PlayerSprite/FourStepAheadMarker
 
 
 func _physics_process(delta: float) -> void:
-	if not _maze:
+	if not maze:
 		return
 	
 	_process_movement(delta)
@@ -34,21 +38,26 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			_change_next_direction(next_direction)
 
 
-func get_position_ahead(cell_amount: int) -> Vector2:
-	return position + (_direction * CELL_SIZE * cell_amount)
+func get_two_steps_ahead() -> Vector2:
+	var position_ahead := two_step_ahead_marker.global_position
+	return maze.get_tile_center(position_ahead)
 
+
+func get_four_steps_ahead() -> Vector2:
+	var position_ahead := four_step_ahead_marker.global_position
+	return maze.get_tile_center(position_ahead)
 
 
 func _process_movement(delta: float) -> void:
-	var current_cell_center := _maze.get_cell_center(position)
+	var current_cell_center := maze.get_tile_center(position)
 	var distance_to_center := position.distance_to(current_cell_center)
 	var distance_limit := speed / 100
 	
 	if distance_to_center < distance_limit:
 		position = current_cell_center
 		
-		var is_direction_cell_wall := _maze.is_cell_wall(position + _direction * CELL_SIZE)
-		var is_next_direction_cell_wall := _maze.is_cell_wall(position + _next_direction * CELL_SIZE)
+		var is_direction_cell_wall := maze.is_tile_wall(position + _direction * CELL_SIZE)
+		var is_next_direction_cell_wall := maze.is_tile_wall(position + _next_direction * CELL_SIZE)
 		
 		if not is_next_direction_cell_wall:
 			_direction = _next_direction
