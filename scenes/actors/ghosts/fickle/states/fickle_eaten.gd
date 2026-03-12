@@ -1,7 +1,7 @@
 extends GhostState
 
 
-@onready var jail_cell_position: Vector2 = Game.ghost_jail_positions[Game.JailCell.Right]
+@onready var jail_cell_position: Vector2 = Game.ghost_jail_positions[Game.JailCell.Left]
 
 
 func enter(_data := {}) -> void:

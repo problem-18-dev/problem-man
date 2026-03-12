@@ -28,13 +28,8 @@ initial_state = NodePath("Chase")
 [node name="Chase" parent="StateMachine" index="0" unique_id=858192397]
 script = ExtResource("3_wdvf0")
 
-[node name="UpdateTimer" parent="StateMachine/Chase" index="0" unique_id=928845767]
-wait_time = 0.25
-
 [node name="Scatter" parent="StateMachine" index="1" unique_id=949127239]
 script = ExtResource("3_ngau7")
-
-[node name="UpdateTimer" type="Timer" parent="StateMachine/Scatter" index="0" unique_id=339106283]
 
 [node name="Frightened" parent="StateMachine" index="2" unique_id=1799767154]
 script = ExtResource("4_ngau7")
@@ -42,4 +37,4 @@ script = ExtResource("4_ngau7")
 [node name="Eaten" parent="StateMachine" index="3" unique_id=1008001944]
 script = ExtResource("5_yieru")
 
-[connection signal="timeout" from="StateMachine/Scatter/UpdateTimer" to="StateMachine/Scatter" method="_on_update_timer_timeout"]
+[connection signal="timeout" from="StateMachine/Chase/UpdateTimer" to="StateMachine/Chase" method="_on_update_timer_timeout"]

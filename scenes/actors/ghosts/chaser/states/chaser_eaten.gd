@@ -1,12 +1,16 @@
 extends GhostState
 
 
-const JAIL_CELL := Vector2(14, 11)
+@onready var jail_cell_position: Vector2 = Game.ghost_jail_positions[Game.JailCell.Out]
 
 
 func enter(_data := {}) -> void:
-	ghost.move_pointer = 0
-	ghost.go_to_jail(JAIL_CELL)
+	var jail_cell := NavigationManager.position_to_cell(jail_cell_position)
+	ghost.go_to_jail(jail_cell)
+
+
+func exit() -> void:
+	ghost.reset_pathing()
 
 
 func physics_update(_delta: float) -> void:

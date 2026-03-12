@@ -8,8 +8,13 @@ extends CharacterBody2D
 var move_pointer := 0
 var move_points: PackedVector2Array
 var player: Player
+var manager: GhostsManager
 
 @onready var nav_preview_line: Line2D = $NavPreviewLine
+
+
+func _init() -> void:
+	EventBus.state_changed.connect(_on_state_changed)
 
 
 func _ready() -> void:
@@ -35,35 +40,27 @@ func navigate() -> void:
 
 func escape_from_player() -> void:
 	var current_cell := NavigationManager.position_to_cell(position)
-	var player_cell := NavigationManager.position_to_cell(player.get_position())
-	var escape_cell := (player_cell - current_cell) * -1
+	var escape_cell := NavigationManager.get_random_cell()
 	var new_move_points := NavigationManager.get_move_points(current_cell, escape_cell)
-	move_points = new_move_points
-	nav_preview_line.points = new_move_points
+	set_pathing(new_move_points)
 
 
 func go_to_jail(jail_cell: Vector2) -> void:
 	var current_cell := NavigationManager.position_to_cell(position)
 	var new_move_points := NavigationManager.get_move_points(current_cell, jail_cell)
+	set_pathing(new_move_points)
+
+
+func set_pathing(new_move_points: PackedVector2Array) -> void:
+	move_pointer = 0
 	move_points = new_move_points
 	nav_preview_line.points = new_move_points
 
 
-func _on_chase_pressed() -> void:
-	$StateMachine._transition_to_next_state("Chase")
-	$CanvasLayer/Label.text = "State: Chase"
+func reset_pathing() -> void:
+	move_points = []
+	move_pointer = 0
 
 
-func _on_scatter_pressed() -> void:
-	$StateMachine._transition_to_next_state("Scatter")
-	$CanvasLayer/Label.text = "State: Scatter"
-
-
-func _on_frightened_pressed() -> void:
-	$StateMachine._transition_to_next_state("Frightened")
-	$CanvasLayer/Label.text = "State: Frightened"
-
-
-func _on_eaten_pressed() -> void:
-	$StateMachine._transition_to_next_state("Eaten")
-	$CanvasLayer/Label.text = "State: Eaten"
+func _on_state_changed(state: String) -> void:
+	$StateMachine._transition_to_next_state(state)

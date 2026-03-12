@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://drapp5yqpmc3x"]
+
+[ext_resource type="PackedScene" uid="uid://cmhu8r4sq11d0" path="res://scenes/mazes/base_maze.tscn" id="1_8xnxh"]
+[ext_resource type="Script" uid="uid://dfs5ettoxvpj" path="res://core/game.gd" id="1_a04qp"]
+[ext_resource type="PackedScene" uid="uid://dvuo38cya8due" path="res://scenes/actors/player/player.tscn" id="2_a04qp"]
+[ext_resource type="PackedScene" uid="uid://db0b1tyfbdh2s" path="res://scenes/managers/ghosts_manager/ghosts_manager.tscn" id="3_sjcnv"]
+
+[node name="Game" type="Node" unique_id=548363564]
+script = ExtResource("1_a04qp")
+
+[node name="BaseMaze" parent="." unique_id=1167720938 instance=ExtResource("1_8xnxh")]
+
+[node name="Player" parent="." unique_id=1813718993 node_paths=PackedStringArray("maze") instance=ExtResource("2_a04qp")]
+position = Vector2(224, 264)
+maze = NodePath("../BaseMaze")
+
+[node name="GhostsManager" parent="." unique_id=470176556 node_paths=PackedStringArray("maze") instance=ExtResource("3_sjcnv")]
+maze = NodePath("../BaseMaze")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1562844652]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD" unique_id=1412894622]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -47.0
+offset_right = 61.0
+offset_bottom = 47.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="Chase" type="Button" parent="HUD/VBoxContainer" unique_id=584573631]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Chase"
+
+[node name="Scatter" type="Button" parent="HUD/VBoxContainer" unique_id=52777684]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Scatter"
+
+[node name="Frightened" type="Button" parent="HUD/VBoxContainer" unique_id=98430644]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Frightened"
+
+[node name="Eaten" type="Button" parent="HUD/VBoxContainer" unique_id=1069644519]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Eaten"
+
+[node name="Label" type="Label" parent="HUD" unique_id=758689242]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -80.0
+offset_right = 49.0
+offset_bottom = -57.0
+grow_vertical = 2
+size_flags_horizontal = 0
+text = "State: "
+
+[connection signal="pressed" from="HUD/VBoxContainer/Chase" to="." method="_on_chase_pressed"]
+[connection signal="pressed" from="HUD/VBoxContainer/Scatter" to="." method="_on_scatter_pressed"]
+[connection signal="pressed" from="HUD/VBoxContainer/Frightened" to="." method="_on_frightened_pressed"]
+[connection signal="pressed" from="HUD/VBoxContainer/Eaten" to="." method="_on_eaten_pressed"]
+
+[editable path="GhostsManager"]

@@ -23,7 +23,7 @@ default_color = Color(0.9882353, 0, 0, 1)
 texture = SubResource("GradientTexture1D_yu7o2")
 
 [node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("Eaten")
+initial_state = NodePath("Chase")
 
 [node name="Chase" parent="StateMachine" index="0" unique_id=858192397]
 script = ExtResource("2_rwdam")
@@ -37,39 +37,4 @@ script = ExtResource("4_cmls4")
 [node name="Eaten" parent="StateMachine" index="3" unique_id=1008001944]
 script = ExtResource("5_eefqh")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="4" unique_id=1048616046]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" index="0" unique_id=264497589]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 100.0
-offset_bottom = 144.0
-
-[node name="Chase" type="Button" parent="CanvasLayer/VBoxContainer" index="0" unique_id=629187506]
-layout_mode = 2
-text = "Chase"
-
-[node name="Scatter" type="Button" parent="CanvasLayer/VBoxContainer" index="1" unique_id=250288037]
-layout_mode = 2
-text = "Scatter"
-
-[node name="Frightened" type="Button" parent="CanvasLayer/VBoxContainer" index="2" unique_id=651915478]
-layout_mode = 2
-text = "Frightened"
-
-[node name="Eaten" type="Button" parent="CanvasLayer/VBoxContainer" index="3" unique_id=494711620]
-layout_mode = 2
-text = "Eaten"
-
-[node name="Label" type="Label" parent="CanvasLayer" index="1" unique_id=1979743049]
-offset_left = 120.0
-offset_top = 8.0
-offset_right = 226.0
-offset_bottom = 31.0
-text = "State: Eaten"
-
 [connection signal="timeout" from="StateMachine/Chase/UpdateTimer" to="StateMachine/Chase" method="_on_update_timer_timeout"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Chase" to="." method="_on_chase_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Scatter" to="." method="_on_scatter_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Frightened" to="." method="_on_frightened_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/Eaten" to="." method="_on_eaten_pressed"]

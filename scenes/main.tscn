@@ -1,24 +1,7 @@
 [gd_scene format=3 uid="uid://dxk1sn313g6cr"]
 
-[ext_resource type="PackedScene" uid="uid://cmhu8r4sq11d0" path="res://scenes/mazes/base_maze.tscn" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://dvuo38cya8due" path="res://scenes/actors/player/player.tscn" id="2_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://db0b1tyfbdh2s" path="res://scenes/managers/ghosts_manager/ghosts_manager.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://drapp5yqpmc3x" path="res://core/game.tscn" id="1_o5qli"]
 
 [node name="Main" type="Node" unique_id=1314322054]
 
-[node name="BaseMaze" parent="." unique_id=1167720938 instance=ExtResource("1_o5qli")]
-
-[node name="Player" parent="." unique_id=1813718993 node_paths=PackedStringArray("maze") instance=ExtResource("2_0wfyh")]
-position = Vector2(224, 264)
-maze = NodePath("../BaseMaze")
-
-[node name="GhostsManager" parent="." unique_id=470176556 instance=ExtResource("2_sugp2")]
-
-[node name="Chaser" parent="GhostsManager" index="0" unique_id=2065532699]
-position = Vector2(152, 88)
-
-[node name="Ambusher" parent="GhostsManager" index="1" unique_id=1086585638]
-visible = false
-position = Vector2(296, 88)
-
-[editable path="GhostsManager"]
+[node name="Game" parent="." unique_id=548363564 instance=ExtResource("1_o5qli")]
