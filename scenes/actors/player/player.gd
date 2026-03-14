@@ -1,5 +1,5 @@
 class_name Player
-extends CharacterBody2D
+extends Area2D
 
 
 const CELL_SIZE := 16
@@ -77,3 +77,7 @@ func _change_next_direction(new_direction: Vector2) -> void:
 		player_sprite.rotation = new_direction.angle()
 	
 	direction_sprite.rotation = new_direction.angle()
+
+
+func _on_area_entered(edible: Edible) -> void:
+	edible.eat()

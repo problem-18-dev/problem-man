@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bl1dryvym2es3"]
+
+[ext_resource type="PackedScene" uid="uid://qm2i223s7lvl" path="res://scenes/edibles/edible/edible.tscn" id="1_5stw4"]
+[ext_resource type="Script" uid="uid://c7wbciv8n502f" path="res://scenes/edibles/power_up/power_up.gd" id="2_5vsu3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5vsu3"]
+radius = 4.0
+
+[sub_resource type="Gradient" id="Gradient_5vsu3"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.9999998, 0.5982035, 0.08893306, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jyk6o"]
+gradient = SubResource("Gradient_5vsu3")
+width = 12
+
+[node name="PowerUp" unique_id=1899775672 instance=ExtResource("1_5stw4")]
+script = ExtResource("2_5vsu3")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=2125336078]
+shape = SubResource("CircleShape2D_5vsu3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2" unique_id=2139344138 groups=["edibles"]]
+scale = Vector2(1, 12)
+texture = SubResource("GradientTexture1D_jyk6o")

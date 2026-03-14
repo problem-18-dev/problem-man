@@ -1,7 +1,7 @@
 extends GhostState
 
 
-@onready var corner_cell: Vector2 = Game.ghost_corners[Game.Corner.BottomLeft]
+@onready var corner_cell: Vector2 = MazeConfig.ghost_corners[MazeConfig.Corner.BottomLeft]
 @onready var update_timer: Timer = $UpdateTimer
 
 

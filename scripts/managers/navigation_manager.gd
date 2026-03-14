@@ -1,7 +1,7 @@
 extends Node
 
 
-const REGION := Rect2i(0, 0, 28, 30)
+const REGION := Rect2i(0, 0, 28, 29)
 const CELL_SIZE := Vector2i(16, 16)
 
 var grid := AStarGrid2D.new()

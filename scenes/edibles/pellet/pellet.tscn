@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dgclxxyq4food"]
+
+[ext_resource type="PackedScene" uid="uid://qm2i223s7lvl" path="res://scenes/edibles/edible/edible.tscn" id="1_jyhxw"]
+[ext_resource type="Script" uid="uid://mq7hwvbjnh6e" path="res://scenes/edibles/pellet/pellet.gd" id="2_yx2iw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yx2iw"]
+radius = 4.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yx2iw"]
+
+[sub_resource type="Gradient" id="Gradient_dcy6h"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.64058656, 0.094699375, 0.9811037, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_02a6g"]
+gradient = SubResource("Gradient_dcy6h")
+width = 8
+
+[node name="Pellet" unique_id=1899775672 instance=ExtResource("1_jyhxw")]
+script = ExtResource("2_yx2iw")
+value = 25
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=2125336078]
+shape = SubResource("CircleShape2D_yx2iw")
+
+[node name="AnimatedSprite2D" parent="." index="1" unique_id=691786392]
+sprite_frames = SubResource("SpriteFrames_yx2iw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2" unique_id=1463901645]
+scale = Vector2(1, 8)
+texture = SubResource("GradientTexture1D_02a6g")

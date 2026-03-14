@@ -7,10 +7,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8afob"]
 radius = 7.0
 
-[node name="Player" type="CharacterBody2D" unique_id=1813718993 groups=["player"]]
-collision_mask = 8
-motion_mode = 1
-wall_min_slide_angle = 0.0
+[node name="Player" type="Area2D" unique_id=839305927 groups=["player"]]
+collision_mask = 4
 script = ExtResource("1_dovo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1285943555]
@@ -30,3 +28,5 @@ position = Vector2(64, 0)
 [node name="DirectionSprite" type="Sprite2D" parent="Sprites" unique_id=354957197]
 texture = ExtResource("3_gmlin")
 offset = Vector2(8, 0)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,7 +1,7 @@
 extends GhostState
 
 
-@onready var corner_cell: Vector2 = Game.ghost_corners[Game.Corner.TopRight]
+@onready var corner_cell: Vector2 = MazeConfig.ghost_corners[MazeConfig.Corner.TopRight]
 
 
 func enter(_data := {}) -> void:

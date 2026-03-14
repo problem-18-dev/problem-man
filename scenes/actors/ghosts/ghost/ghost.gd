@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 
 @export_category("Stats")
-@export var speed := 125.0
+@export var speed := 100.0
 
 var move_pointer := 0
 var move_points: PackedVector2Array

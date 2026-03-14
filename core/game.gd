@@ -1,17 +1,9 @@
 extends Node
 
 
-func _on_chase_pressed() -> void:
-	EventBus.state_changed.emit("Chase")
+@onready var hud: CanvasLayer = $HUD
 
 
-func _on_scatter_pressed() -> void:
-	EventBus.state_changed.emit("Scatter")
-
-
-func _on_frightened_pressed() -> void:
-	EventBus.state_changed.emit("Frightened")
-
-
-func _on_eaten_pressed() -> void:
-	EventBus.state_changed.emit("Eaten") 
+func _on_base_maze_score_added(score: int) -> void:
+	var new_score := GameManager.add_score(score)
+	hud.change_score(new_score)

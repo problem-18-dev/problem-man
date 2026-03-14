@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://qm2i223s7lvl"]
+
+[ext_resource type="Script" uid="uid://7xwtoybvrran" path="res://scenes/edibles/edible/edible.gd" id="1_8waoh"]
+
+[node name="Edible" type="Area2D" unique_id=1899775672 groups=["edibles"]]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_8waoh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2125336078]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=691786392]

@@ -1,7 +1,7 @@
 extends GhostState
 
 
-@onready var jail_cell_position: Vector2 = Game.ghost_jail_positions[Game.JailCell.Center]
+@onready var jail_cell_position: Vector2 = MazeConfig.ghost_jail_positions[MazeConfig.JailCell.Center]
 
 
 func enter(_data := {}) -> void:
