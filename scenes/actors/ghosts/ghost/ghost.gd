@@ -1,20 +1,45 @@
 class_name Ghost
-extends CharacterBody2D
+extends Area2D
 
 
-@export_category("Stats")
+enum State { Chase, Scatter, Frightened, Eaten }
+enum Corner { TopLeft, TopRight, BottomLeft, BottomRight }
+enum JailCell { Left, Center, Right, Out }
+
+const STATES := {
+	State.Chase: "Chase",
+	State.Scatter: "Scatter",
+	State.Frightened: "Frightened",
+	State.Eaten: "Eaten",
+}
+
+const CORNERS := {
+	Corner.TopLeft: Vector2(1, 1),
+	Corner.TopRight: Vector2(26, 1),
+	Corner.BottomLeft: Vector2(1, 27),
+	Corner.BottomRight: Vector2(26, 27),
+}
+
+const JAIL := {
+	JailCell.Left: Vector2(11, 13), 
+	JailCell.Center: Vector2(13, 13),
+	JailCell.Right: Vector2(16, 13),
+	JailCell.Out: Vector2(14, 11),
+}
+
+@export_group("Statistics")
 @export var speed := 100.0
 
+var is_busy := false
+var current_speed := speed
 var move_pointer := 0
 var move_points: PackedVector2Array
 var player: Player
 var manager: GhostsManager
 
 @onready var nav_preview_line: Line2D = $NavPreviewLine
-
-
-func _init() -> void:
-	EventBus.state_changed.connect(_on_state_changed)
+@onready var state_machine: StateMachine = $StateMachine
+@onready var sprite: Sprite2D = $Sprite
 
 
 func _ready() -> void:
@@ -31,14 +56,18 @@ func navigate() -> void:
 	
 	var next_position := move_points[move_pointer + 1]
 	var direction := (next_position - position).normalized()
-	position += direction * speed * get_physics_process_delta_time()
+	position += direction * current_speed * get_physics_process_delta_time()
 	
-	if position.distance_to(next_position) < speed / 100:
+	if position.distance_to(next_position) < current_speed / 100:
 		position = next_position
 		move_pointer += 1
 
 
-func escape_from_player() -> void:
+func die() -> void:
+	change_state(Ghost.State.Eaten)
+
+
+func find_escape_path() -> void:
 	var current_cell := NavigationManager.position_to_cell(position)
 	var escape_cell := NavigationManager.get_random_cell()
 	var new_move_points := NavigationManager.get_move_points(current_cell, escape_cell)
@@ -58,9 +87,14 @@ func set_pathing(new_move_points: PackedVector2Array) -> void:
 
 
 func reset_pathing() -> void:
+	current_speed = speed
 	move_points = []
 	move_pointer = 0
 
 
-func _on_state_changed(state: String) -> void:
-	$StateMachine._transition_to_next_state(state)
+func change_state(state: Ghost.State) -> void:
+	state_machine.transition_to_next_state(Ghost.STATES[state])
+
+
+func is_in_state(state: Ghost.State) -> bool:
+	return state_machine.state.name == STATES[state]

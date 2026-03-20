@@ -1,7 +1,7 @@
 extends GhostState
 
 
-@onready var corner_cell: Vector2 = MazeConfig.ghost_corners[MazeConfig.Corner.BottomLeft]
+@onready var corner_cell: Vector2 = Ghost.CORNERS[Ghost.Corner.BottomLeft]
 @onready var update_timer: Timer = $UpdateTimer
 
 
@@ -31,8 +31,8 @@ func _check_distance_to_player() -> void:
 	var move_points := NavigationManager.get_move_points(current_cell, player_cell)
 	
 	# If more than 8 tiles away, chase player
-	#if move_points.size() > 8:
-		#finished.emit(CHASE)
+	if move_points.size() > 8:
+		finished.emit(CHASE)
 
 
 func _on_update_timer_timeout() -> void:

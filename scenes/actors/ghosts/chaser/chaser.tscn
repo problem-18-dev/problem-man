@@ -3,8 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_yu7o2"]
 [ext_resource type="Script" uid="uid://rk08rda6o1j6" path="res://scenes/actors/ghosts/chaser/states/chaser_chase.gd" id="2_rwdam"]
 [ext_resource type="Script" uid="uid://e8vwef8uny6b" path="res://scenes/actors/ghosts/chaser/states/chaser_scatter.gd" id="3_45bs7"]
-[ext_resource type="Script" uid="uid://ct316a1oxscl0" path="res://scenes/actors/ghosts/chaser/states/chaser_frightened.gd" id="4_cmls4"]
-[ext_resource type="Script" uid="uid://bovafpqs3tguy" path="res://scenes/actors/ghosts/chaser/states/chaser_eaten.gd" id="5_eefqh"]
 
 [sub_resource type="Gradient" id="Gradient_fngwq"]
 offsets = PackedFloat32Array(0)
@@ -23,7 +21,7 @@ default_color = Color(0.9882353, 0, 0, 1)
 texture = SubResource("GradientTexture1D_yu7o2")
 
 [node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("Chase")
+initial_state = NodePath("Scatter")
 
 [node name="Chase" parent="StateMachine" index="0" unique_id=858192397]
 script = ExtResource("2_rwdam")
@@ -31,10 +29,7 @@ script = ExtResource("2_rwdam")
 [node name="Scatter" parent="StateMachine" index="1" unique_id=949127239]
 script = ExtResource("3_45bs7")
 
-[node name="Frightened" parent="StateMachine" index="2" unique_id=1799767154]
-script = ExtResource("4_cmls4")
-
 [node name="Eaten" parent="StateMachine" index="3" unique_id=1008001944]
-script = ExtResource("5_eefqh")
+jail_cell_position = 3
 
 [connection signal="timeout" from="StateMachine/Chase/UpdateTimer" to="StateMachine/Chase" method="_on_update_timer_timeout"]

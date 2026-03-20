@@ -8,7 +8,7 @@
 radius = 7.0
 
 [node name="Player" type="Area2D" unique_id=839305927 groups=["player"]]
-collision_mask = 4
+collision_mask = 6
 script = ExtResource("1_dovo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1285943555]

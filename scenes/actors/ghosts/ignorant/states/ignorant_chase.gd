@@ -24,9 +24,9 @@ func _update_nav_to_player() -> void:
 	var move_points := NavigationManager.get_move_points(current_cell, target_cell)
 	
 	# If within 8 tiles, go to corner
-	#if move_points.size() <= 8:
-		#finished.emit(SCATTER)
-		#return
+	if move_points.size() <= 8:
+		finished.emit(SCATTER)
+		return
 	
 	ghost.set_pathing(move_points)
 

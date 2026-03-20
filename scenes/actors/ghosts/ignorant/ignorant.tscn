@@ -4,8 +4,6 @@
 [ext_resource type="Script" uid="uid://cc57l2n1jq0ja" path="res://scenes/actors/ghosts/ignorant/ignorant.gd" id="2_c6uw6"]
 [ext_resource type="Script" uid="uid://dchgon410yuxq" path="res://scenes/actors/ghosts/ignorant/states/ignorant_chase.gd" id="3_bqgjy"]
 [ext_resource type="Script" uid="uid://dkayycc4vdv3b" path="res://scenes/actors/ghosts/ignorant/states/ignorant_scatter.gd" id="4_uxiug"]
-[ext_resource type="Script" uid="uid://dl222bneknejc" path="res://scenes/actors/ghosts/ignorant/states/ignorant_frightened.gd" id="5_6bm1l"]
-[ext_resource type="Script" uid="uid://ccohlyeocrgm" path="res://scenes/actors/ghosts/ignorant/states/ignorant_eaten.gd" id="6_bpfei"]
 
 [sub_resource type="Gradient" id="Gradient_vi7wx"]
 offsets = PackedFloat32Array(0)
@@ -25,7 +23,7 @@ default_color = Color(1, 0.40392157, 0, 1)
 texture = SubResource("GradientTexture1D_c6uw6")
 
 [node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("Chase")
+initial_state = NodePath("Scatter")
 
 [node name="Chase" parent="StateMachine" index="0" unique_id=858192397]
 script = ExtResource("3_bqgjy")
@@ -36,11 +34,8 @@ script = ExtResource("4_uxiug")
 [node name="UpdateTimer" type="Timer" parent="StateMachine/Scatter" index="0" unique_id=297438112]
 wait_time = 0.25
 
-[node name="Frightened" parent="StateMachine" index="2" unique_id=1799767154]
-script = ExtResource("5_6bm1l")
-
 [node name="Eaten" parent="StateMachine" index="3" unique_id=1008001944]
-script = ExtResource("6_bpfei")
+jail_cell_position = 2
 
 [connection signal="timeout" from="StateMachine/Chase/UpdateTimer" to="StateMachine/Chase" method="_on_update_timer_timeout"]
 [connection signal="timeout" from="StateMachine/Scatter/UpdateTimer" to="StateMachine/Scatter" method="_on_update_timer_timeout"]

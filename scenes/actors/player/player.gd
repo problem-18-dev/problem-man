@@ -9,6 +9,7 @@ const CELL_SIZE := 16
 @export_category("Maze")
 @export var maze: Maze
 
+var _screen_size := Vector2.ZERO
 var _direction := Vector2.RIGHT
 var _next_direction := _direction
 var _available_directions := {
@@ -24,11 +25,16 @@ var _available_directions := {
 @onready var four_step_ahead_marker: Marker2D = $Sprites/PlayerSprite/FourStepAheadMarker
 
 
+func _ready() -> void:
+	_screen_size = get_viewport_rect().size
+
+
 func _physics_process(delta: float) -> void:
 	if not maze:
 		return
 	
 	_process_movement(delta)
+	_wrap_position()
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
@@ -79,5 +85,14 @@ func _change_next_direction(new_direction: Vector2) -> void:
 	direction_sprite.rotation = new_direction.angle()
 
 
-func _on_area_entered(edible: Edible) -> void:
-	edible.eat()
+func _wrap_position() -> void:
+	position.x = wrapf(position.x, 0, _screen_size.x)
+
+
+func _on_area_entered(edible: Area2D) -> void:
+	if edible is Edible:
+		edible.eat()
+	
+	if edible is Ghost:
+		if edible.is_in_state(Ghost.State.Frightened):
+			edible.die()

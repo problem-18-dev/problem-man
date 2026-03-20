@@ -2,11 +2,15 @@ class_name Maze
 extends TileMapLayer
 
 
-signal score_added(score: int)
+const FRUIT_SPAWN_LOCATION := Vector2(224, 248)
 
+signal score_added(score: int)
+signal powerup_eaten
+signal level_ended
 
 var _fruit_scene: PackedScene = preload("res://scenes/edibles/fruit/fruit.tscn")
 var _pellet_scene: PackedScene = preload("res://scenes/edibles/pellet/pellet.tscn")
+var _powerup_scene: PackedScene = preload("res://scenes/edibles/power_up/power_up.tscn")
 var _total_pellets := 0
 
 @onready var pellets: Node2D = $Pellets
@@ -44,9 +48,8 @@ func _spawn_fruit() -> void:
 	if fruits.get_child_count() > 0:
 		return
 	
-	var spawn_location := Vector2(224, 248)
 	var fruit: Edible = _fruit_scene.instantiate()
-	fruit.position = spawn_location
+	fruit.position = FRUIT_SPAWN_LOCATION
 	fruit.eaten.connect(_on_fruit_eaten)
 	fruits.call_deferred("add_child", fruit)
 
@@ -54,13 +57,25 @@ func _spawn_fruit() -> void:
 func _spawn_pellets() -> void:
 	for cell in get_used_cells():
 		var cell_data := get_cell_tile_data(cell)
-		if cell_data and cell_data.get_custom_data("is_pellet"):
-			var pellet: Area2D = _pellet_scene.instantiate()
-			pellet.position = map_to_local(cell)
-			pellet.eaten.connect(_on_pellet_eaten)
-			pellets.add_child(pellet)
+		if cell_data:
+			if cell_data.get_custom_data("is_pellet"):
+				var pellet: Area2D = _pellet_scene.instantiate()
+				pellet.position = map_to_local(cell)
+				pellet.eaten.connect(_on_pellet_eaten)
+				pellets.add_child(pellet)
+				continue
+			
+			if cell_data.get_custom_data("is_powerup"):
+				var powerup: Area2D = _powerup_scene.instantiate()
+				powerup.position = map_to_local(cell)
+				powerup.power_up_eaten.connect(_on_powerup_eaten)
+				power_ups.add_child(powerup)
 	
 	_total_pellets = pellets.get_child_count()
+
+
+func _on_powerup_eaten() -> void:
+	powerup_eaten.emit()
 
 
 func _on_fruit_eaten(score: int) -> void:
@@ -73,5 +88,8 @@ func _on_pellet_eaten(score: int) -> void:
 	
 	if pellets_eaten == 25 or pellets_eaten == 170:
 		_spawn_fruit()
+	
+	if pellets_left == 0:
+		level_ended.emit()
 	
 	score_added.emit(score)

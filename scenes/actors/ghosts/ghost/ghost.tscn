@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://dh2lur6087ntr" path="res://scenes/actors/ghosts/ghost/ghost.gd" id="1_dy8p8"]
 [ext_resource type="PackedScene" uid="uid://bv57113kyh2ga" path="res://scenes/state_machine/state_machine.tscn" id="2_lrge8"]
+[ext_resource type="Script" uid="uid://bpqljyo15p2wk" path="res://scenes/actors/ghosts/ghost/states/frightened.gd" id="4_r8he8"]
+[ext_resource type="Script" uid="uid://babijmgfoedq6" path="res://scenes/actors/ghosts/ghost/states/eaten.gd" id="5_bd7np"]
 
 [sub_resource type="Gradient" id="Gradient_fngwq"]
 offsets = PackedFloat32Array(0)
@@ -11,7 +13,12 @@ colors = PackedColorArray(0.9882353, 0, 0, 1)
 gradient = SubResource("Gradient_fngwq")
 width = 16
 
-[node name="Ghost" type="CharacterBody2D" unique_id=1086585638]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bd7np"]
+size = Vector2(16, 16)
+
+[node name="Ghost" type="Area2D" unique_id=885397454]
+collision_layer = 2
+collision_mask = 0
 script = ExtResource("1_dy8p8")
 
 [node name="NavPreviewLine" type="Line2D" parent="." unique_id=780997796]
@@ -24,8 +31,10 @@ scale = Vector2(1, 16)
 texture = SubResource("GradientTexture1D_2hoxp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668550691]
+shape = SubResource("RectangleShape2D_bd7np")
 
-[node name="StateMachine" parent="." unique_id=1128070307 instance=ExtResource("2_lrge8")]
+[node name="StateMachine" parent="." unique_id=1128070307 node_paths=PackedStringArray("initial_state") instance=ExtResource("2_lrge8")]
+initial_state = NodePath("")
 
 [node name="Chase" type="Node" parent="StateMachine" unique_id=858192397]
 
@@ -35,5 +44,7 @@ wait_time = 0.25
 [node name="Scatter" type="Node" parent="StateMachine" unique_id=949127239]
 
 [node name="Frightened" type="Node" parent="StateMachine" unique_id=1799767154]
+script = ExtResource("4_r8he8")
 
 [node name="Eaten" type="Node" parent="StateMachine" unique_id=1008001944]
+script = ExtResource("5_bd7np")

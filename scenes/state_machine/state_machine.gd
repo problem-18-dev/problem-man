@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 	var children = find_children("*", "State") as Array[State]
 	for state_node: State in children:
-		state_node.finished.connect(_transition_to_next_state)
+		state_node.finished.connect(transition_to_next_state)
 	
 	await owner.ready
 	state.enter()
@@ -22,7 +22,7 @@ func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 
 
-func _transition_to_next_state(next_state: String, data := {}) -> void:
+func transition_to_next_state(next_state: String, data := {}) -> void:
 	assert(has_node(next_state), "Transitioning to state %s, but it doesn't exist" % next_state)
 	
 	state.exit()
