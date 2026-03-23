@@ -3,8 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_vxxy4"]
 [ext_resource type="Script" uid="uid://d3m8lsmn0btkt" path="res://scenes/actors/ghosts/fickle/states/fickle_chase.gd" id="2_clfb4"]
 [ext_resource type="Script" uid="uid://577xtyuodtem" path="res://scenes/actors/ghosts/fickle/states/fickle_scatter.gd" id="3_2pmkt"]
-[ext_resource type="Script" uid="uid://bln55k0lsunwj" path="res://scenes/actors/ghosts/fickle/states/fickle_frightened.gd" id="4_tln7n"]
-[ext_resource type="Script" uid="uid://cf4shuk7oog1x" path="res://scenes/actors/ghosts/fickle/states/fickle_eaten.gd" id="5_jm4dg"]
 
 [sub_resource type="Gradient" id="Gradient_vxxy4"]
 offsets = PackedFloat32Array(0)
@@ -23,18 +21,12 @@ default_color = Color(0.15693057, 0.50624835, 1, 1)
 texture = SubResource("GradientTexture1D_clfb4")
 
 [node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
-initial_state = NodePath("Chase")
+initial_state = NodePath("Scatter")
 
 [node name="Chase" parent="StateMachine" index="0" unique_id=858192397]
 script = ExtResource("2_clfb4")
 
 [node name="Scatter" parent="StateMachine" index="1" unique_id=949127239]
 script = ExtResource("3_2pmkt")
-
-[node name="Frightened" parent="StateMachine" index="2" unique_id=1799767154]
-script = ExtResource("4_tln7n")
-
-[node name="Eaten" parent="StateMachine" index="3" unique_id=1008001944]
-script = ExtResource("5_jm4dg")
 
 [connection signal="timeout" from="StateMachine/Chase/UpdateTimer" to="StateMachine/Chase" method="_on_update_timer_timeout"]

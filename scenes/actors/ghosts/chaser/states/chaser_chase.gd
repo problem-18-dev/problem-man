@@ -1,17 +1,17 @@
 extends GhostState
 
 
-@onready var timer: Timer = $UpdateTimer
+@onready var update_timer: Timer = $UpdateTimer
 
 
 func enter(_data := {}) -> void:
-	timer.start()
+	update_timer.start()
 	_update_nav_to_player()
 
 
 func exit() -> void:
+	update_timer.stop()
 	ghost.reset_pathing()
-	timer.stop()
 
 
 func physics_update(_delta: float) -> void:
@@ -26,4 +26,8 @@ func _update_nav_to_player() -> void:
 
 
 func _on_update_timer_timeout() -> void:
+	if not ghost.player:
+		update_timer.stop()
+		return
+	
 	_update_nav_to_player()

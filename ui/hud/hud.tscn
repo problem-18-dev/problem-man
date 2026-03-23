@@ -5,42 +5,6 @@
 [node name="HUD" type="CanvasLayer" unique_id=16662674]
 script = ExtResource("1_xmswo")
 
-[node name="StatesContainer" type="HBoxContainer" parent="." unique_id=481150502]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -192.0
-offset_top = -25.0
-offset_right = -8.0
-offset_bottom = -3.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/separation = 2
-
-[node name="Chase" type="Button" parent="StatesContainer" unique_id=1079388167]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Chase"
-
-[node name="Scatter" type="Button" parent="StatesContainer" unique_id=819133191]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Scatter"
-
-[node name="Frightened" type="Button" parent="StatesContainer" unique_id=856271220]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Frightened"
-
-[node name="Eaten" type="Button" parent="StatesContainer" unique_id=414634263]
-layout_mode = 2
-theme_override_font_sizes/font_size = 10
-text = "Eaten"
-
 [node name="StateLabel" type="Label" parent="." unique_id=1305742307]
 anchors_preset = 7
 anchor_left = 0.5
@@ -68,8 +32,3 @@ offset_bottom = -7.0
 grow_vertical = 0
 size_flags_horizontal = 0
 text = "000000"
-
-[connection signal="pressed" from="StatesContainer/Chase" to="." method="_on_chase_pressed"]
-[connection signal="pressed" from="StatesContainer/Scatter" to="." method="_on_scatter_pressed"]
-[connection signal="pressed" from="StatesContainer/Frightened" to="." method="_on_frightened_pressed"]
-[connection signal="pressed" from="StatesContainer/Eaten" to="." method="_on_eaten_pressed"]

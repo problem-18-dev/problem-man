@@ -26,7 +26,7 @@ general/default_playback_type.web=0
 [autoload]
 
 NavigationManager="*uid://dt1u2n0bp2a1b"
-MazeConfig="*uid://b816fv8yf0fdh"
+GameConfig="*uid://b816fv8yf0fdh"
 EventBus="*uid://bo7lpcrplloaa"
 GameManager="*uid://cnu6xrngdvmvf"
 

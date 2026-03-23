@@ -1,17 +1,17 @@
 extends GhostState
 
 
-@onready var timer: Timer = $UpdateTimer
+@onready var update_timer: Timer = $UpdateTimer
 
 
 func enter(_data := {}) -> void:
-	timer.start()
+	update_timer.start()
 	_update_nav_to_player()
 
 
 func exit() -> void:
+	update_timer.stop()
 	ghost.reset_pathing()
-	timer.stop()
 
 
 func physics_update(_delta: float) -> void:
@@ -24,12 +24,17 @@ func _update_nav_to_player() -> void:
 	var move_points := NavigationManager.get_move_points(current_cell, target_cell)
 	
 	# If within 8 tiles, go to corner
-	#if move_points.size() <= 8:
-		#finished.emit(SCATTER)
-		#return
+	var game_phase := GameManager.get_current_phase()
+	if game_phase == GameConfig.Phase.Scatter and move_points.size() <= 8:
+		finished.emit(SCATTER)
+		return
 	
 	ghost.set_pathing(move_points)
 
 
 func _on_update_timer_timeout() -> void:
+	if not ghost.player:
+		update_timer.stop()
+		return
+	
 	_update_nav_to_player()

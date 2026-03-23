@@ -4,12 +4,31 @@
 [ext_resource type="Script" uid="uid://dfs5ettoxvpj" path="res://core/game.gd" id="1_a04qp"]
 [ext_resource type="PackedScene" uid="uid://dvuo38cya8due" path="res://scenes/actors/player/player.tscn" id="2_a04qp"]
 [ext_resource type="PackedScene" uid="uid://bmwn22xpbwwue" path="res://ui/hud/hud.tscn" id="2_sjcnv"]
+[ext_resource type="Script" uid="uid://dd0q4to73e72p" path="res://scripts/managers/phase_manager.gd" id="3_cjuek"]
 [ext_resource type="PackedScene" uid="uid://db0b1tyfbdh2s" path="res://scenes/managers/ghosts_manager/ghosts_manager.tscn" id="3_sjcnv"]
 
 [node name="Game" type="Node" unique_id=548363564]
 script = ExtResource("1_a04qp")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1512653639]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="HUD" parent="." unique_id=16662674 instance=ExtResource("2_sjcnv")]
+
+[node name="FrightenedTimer" type="Timer" parent="." unique_id=1201892014]
+wait_time = 7.0
+one_shot = true
+
+[node name="PhaseManager" type="Node" parent="." unique_id=1132946865]
+script = ExtResource("3_cjuek")
+
+[node name="PhaseTimer" type="Timer" parent="PhaseManager" unique_id=215625898]
+one_shot = true
 
 [node name="BaseMaze" parent="." unique_id=1167720938 instance=ExtResource("1_8xnxh")]
 
@@ -20,6 +39,12 @@ maze = NodePath("../BaseMaze")
 [node name="GhostsManager" parent="." unique_id=470176556 node_paths=PackedStringArray("maze") instance=ExtResource("3_sjcnv")]
 maze = NodePath("../BaseMaze")
 
+[connection signal="timeout" from="FrightenedTimer" to="." method="_on_frightened_timer_timeout"]
+[connection signal="phase_changed" from="PhaseManager" to="." method="_on_phase_manager_phase_changed"]
+[connection signal="timeout" from="PhaseManager/PhaseTimer" to="PhaseManager" method="_on_phase_timer_timeout"]
+[connection signal="level_ended" from="BaseMaze" to="." method="_on_base_maze_level_ended"]
+[connection signal="powerup_eaten" from="BaseMaze" to="." method="_on_base_maze_powerup_eaten"]
 [connection signal="score_added" from="BaseMaze" to="." method="_on_base_maze_score_added"]
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 
 [editable path="GhostsManager"]
