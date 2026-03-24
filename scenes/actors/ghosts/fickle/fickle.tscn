@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_vxxy4"]
 [ext_resource type="Script" uid="uid://d3m8lsmn0btkt" path="res://scenes/actors/ghosts/fickle/states/fickle_chase.gd" id="2_clfb4"]
+[ext_resource type="Script" uid="uid://btr1c5nixerj5" path="res://scenes/actors/ghosts/fickle/fickle.gd" id="2_tln7n"]
 [ext_resource type="Script" uid="uid://577xtyuodtem" path="res://scenes/actors/ghosts/fickle/states/fickle_scatter.gd" id="3_2pmkt"]
 
 [sub_resource type="Gradient" id="Gradient_vxxy4"]
@@ -13,6 +14,8 @@ gradient = SubResource("Gradient_vxxy4")
 width = 16
 
 [node name="Fickle" unique_id=1086585638 instance=ExtResource("1_vxxy4")]
+script = ExtResource("2_tln7n")
+speed = 100.0
 
 [node name="NavPreviewLine" parent="." index="0" unique_id=780997796]
 default_color = Color(0.15693057, 0.50624835, 1, 1)

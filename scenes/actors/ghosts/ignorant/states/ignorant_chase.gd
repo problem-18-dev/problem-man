@@ -19,6 +19,10 @@ func physics_update(_delta: float) -> void:
 
 
 func _update_nav_to_player() -> void:
+	if not ghost.player:
+		update_timer.stop()
+		return
+	
 	var current_cell = NavigationManager.position_to_cell(ghost.position)
 	var target_cell := NavigationManager.position_to_cell(ghost.player.position)
 	var move_points := NavigationManager.get_move_points(current_cell, target_cell)
@@ -33,8 +37,4 @@ func _update_nav_to_player() -> void:
 
 
 func _on_update_timer_timeout() -> void:
-	if not ghost.player:
-		update_timer.stop()
-		return
-	
 	_update_nav_to_player()

@@ -2,6 +2,8 @@ class_name Ghost
 extends Area2D
 
 
+signal eaten(ghost: Ghost)
+
 enum State { Chase, Scatter, Frightened, Eaten }
 enum Corner { TopLeft, TopRight, BottomLeft, BottomRight }
 enum JailCell { Left, Center, Right, Out }
@@ -20,17 +22,17 @@ const CORNERS := {
 	Corner.BottomRight: Vector2(26, 27),
 }
 
-const JAIL := {
-	JailCell.Left: Vector2(11, 13), 
-	JailCell.Center: Vector2(13, 13),
-	JailCell.Right: Vector2(16, 13),
-	JailCell.Out: Vector2(14, 11),
+const JAIL_COORDINATES := {
+	JailCell.Left: Vector2(184, 216), 
+	JailCell.Center: Vector2(224, 216),
+	JailCell.Right: Vector2(264, 216),
+	JailCell.Out: Vector2(224, 184),
 }
 
 @export_group("Statistics")
 @export var speed := 100.0
 
-var is_busy := false
+var target_reached := false
 var current_speed := speed
 var move_pointer := 0
 var move_points: PackedVector2Array
@@ -42,18 +44,17 @@ var manager: GhostsManager
 @onready var sprite: Sprite2D = $Sprite
 
 
-func _ready() -> void:
-	player = get_tree().get_first_node_in_group("player")
-
-
 func navigate() -> void:
 	if move_points.size() <= 0:
+		target_reached = true
 		return
 	
 	if move_pointer == move_points.size() - 1:
 		position = move_points[-1]
+		target_reached = true
 		return
 	
+	target_reached = false
 	var next_position := move_points[move_pointer + 1]
 	var direction := (next_position - position).normalized()
 	position += direction * current_speed * get_physics_process_delta_time()
@@ -64,7 +65,7 @@ func navigate() -> void:
 
 
 func die() -> void:
-	change_state(Ghost.State.Eaten)
+	eaten.emit(self)
 
 
 func stop() -> void:
@@ -94,10 +95,11 @@ func reset_pathing() -> void:
 	current_speed = speed
 	move_points = []
 	move_pointer = 0
+	target_reached = false
 
 
-func change_state(state: Ghost.State) -> void:
-	state_machine.transition_to_next_state(Ghost.STATES[state])
+func change_state(state: Ghost.State, data := {}) -> void:
+	state_machine.transition_to_next_state(Ghost.STATES[state], data)
 
 
 func is_in_state(state: Ghost.State) -> bool:

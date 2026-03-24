@@ -36,8 +36,9 @@ one_shot = true
 position = Vector2(224, 248)
 maze = NodePath("../BaseMaze")
 
-[node name="GhostsManager" parent="." unique_id=470176556 node_paths=PackedStringArray("maze") instance=ExtResource("3_sjcnv")]
+[node name="GhostsManager" parent="." unique_id=470176556 node_paths=PackedStringArray("maze", "player") instance=ExtResource("3_sjcnv")]
 maze = NodePath("../BaseMaze")
+player = NodePath("../Player")
 
 [connection signal="timeout" from="FrightenedTimer" to="." method="_on_frightened_timer_timeout"]
 [connection signal="phase_changed" from="PhaseManager" to="." method="_on_phase_manager_phase_changed"]

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dl671bnuld1gt"]
 
 [ext_resource type="PackedScene" uid="uid://lt06bm8cwm7o" path="res://scenes/actors/ghosts/ghost/ghost.tscn" id="1_yu7o2"]
+[ext_resource type="Script" uid="uid://dos5tv0apfwf3" path="res://scenes/actors/ghosts/chaser/chaser.gd" id="2_cmls4"]
 [ext_resource type="Script" uid="uid://rk08rda6o1j6" path="res://scenes/actors/ghosts/chaser/states/chaser_chase.gd" id="2_rwdam"]
 [ext_resource type="Script" uid="uid://e8vwef8uny6b" path="res://scenes/actors/ghosts/chaser/states/chaser_scatter.gd" id="3_45bs7"]
 
@@ -13,6 +14,8 @@ gradient = SubResource("Gradient_fngwq")
 width = 16
 
 [node name="Chaser" unique_id=1086585638 instance=ExtResource("1_yu7o2")]
+script = ExtResource("2_cmls4")
+speed = 100.0
 
 [node name="NavPreviewLine" parent="." index="0" unique_id=780997796]
 default_color = Color(0.9882353, 0, 0, 1)

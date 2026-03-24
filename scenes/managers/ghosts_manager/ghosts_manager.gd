@@ -2,15 +2,19 @@ class_name GhostsManager
 extends Node2D
 
 
+const EATEN_TIMERS: Array[int] = [3, 5, 7]
+
 enum Ghosts { Chaser, Ignorant, Ambusher, Fickle }
 
 @export_group("Debug")
 @export var ghost_nav_lines := false
 @export_group("Dependencies")
 @export var maze: Maze
+@export var player: Player
 
 
 var _spawned_ghosts: Dictionary[Ghosts, Ghost]
+var _eaten_ghosts: Array[Ghost]
 var _ghosts := {
 	Ghosts.Chaser: {
 		"scene": preload("res://scenes/actors/ghosts/chaser/chaser.tscn"),
@@ -48,6 +52,9 @@ func enter_frightened() -> void:
 	for ghost: Ghost in _spawned_ghosts.values():
 		if not ghost.is_in_state(Ghost.State.Eaten):
 			ghost.change_state(Ghost.State.Frightened)
+			continue
+		
+		ghost.change_state(Ghost.State.Eaten)
 
 
 func exit_frightened() -> void:
@@ -77,7 +84,18 @@ func _spawn_ghosts() -> void:
 	for ghost_key: Ghosts in _ghosts.keys():
 		var ghost: Ghost = _ghosts[ghost_key]["scene"].instantiate()
 		var spawn_location: Ghost.JailCell = _ghosts[ghost_key]["spawn_location"]
-		ghost.position = maze.map_to_local(Ghost.JAIL[spawn_location])
+		ghost.position = Ghost.JAIL_COORDINATES[spawn_location]
 		ghost.manager = self
+		ghost.player = player
+		ghost.eaten.connect(_on_ghost_eaten)
 		add_child(ghost)
 		_spawned_ghosts[ghost_key] = ghost
+
+
+func _on_ghost_eaten(ghost: Ghost) -> void:
+	if ghost is Chaser:
+		ghost.change_state(Ghost.State.Eaten)
+		return
+	
+	var respawn_timer := EATEN_TIMERS[_eaten_ghosts.size()]
+	ghost.change_state(Ghost.State.Eaten, { "respawn_timer": respawn_timer })

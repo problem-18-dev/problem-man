@@ -18,10 +18,6 @@ func _ready() -> void:
 	_start_timer()
 
 
-func _process(delta: float) -> void:
-	print(phase_timer.time_left)
-
-
 func pause() -> void:
 	phase_timer.paused = true
 

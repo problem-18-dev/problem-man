@@ -51,3 +51,4 @@ func _on_frightened_timer_timeout() -> void:
 
 func _on_player_hit() -> void:
 	ghosts_manager.stop_ghosts()
+	phase_manager.pause()
