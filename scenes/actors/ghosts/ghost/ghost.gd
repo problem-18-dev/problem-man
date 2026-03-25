@@ -3,6 +3,7 @@ extends Area2D
 
 
 signal eaten(ghost: Ghost)
+signal respawned
 
 enum State { Chase, Scatter, Frightened, Eaten }
 enum Corner { TopLeft, TopRight, BottomLeft, BottomRight }
@@ -29,8 +30,9 @@ const JAIL_COORDINATES := {
 	JailCell.Out: Vector2(224, 184),
 }
 
-@export_group("Statistics")
-@export var speed := 100.0
+@export_group("Properties")
+@export var speed := 75.0
+@export var spawn_cell: JailCell
 
 var target_reached := false
 var current_speed := speed
@@ -42,6 +44,12 @@ var manager: GhostsManager
 @onready var nav_preview_line: Line2D = $NavPreviewLine
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite
+
+
+func _ready() -> void:
+	_determine_speed()
+	_position_to_spawn_cell()
+	await owner.ready
 
 
 func navigate() -> void:
@@ -108,3 +116,13 @@ func is_in_state(state: Ghost.State) -> bool:
 
 func draw_nav_lines() -> void:
 	nav_preview_line.show()
+ 
+
+func _determine_speed() -> void:
+	speed = GameConfig.get_ghost_speed()
+	print("Ghost normal speed:", speed)
+
+
+func _position_to_spawn_cell() -> void:
+	var coordinates: Vector2 = JAIL_COORDINATES[spawn_cell]
+	position = coordinates

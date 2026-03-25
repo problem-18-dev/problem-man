@@ -43,6 +43,7 @@ player = NodePath("../Player")
 [connection signal="timeout" from="FrightenedTimer" to="." method="_on_frightened_timer_timeout"]
 [connection signal="phase_changed" from="PhaseManager" to="." method="_on_phase_manager_phase_changed"]
 [connection signal="timeout" from="PhaseManager/PhaseTimer" to="PhaseManager" method="_on_phase_timer_timeout"]
+[connection signal="cruise_elroy_triggered" from="BaseMaze" to="." method="_on_base_maze_cruise_elroy_triggered"]
 [connection signal="level_ended" from="BaseMaze" to="." method="_on_base_maze_level_ended"]
 [connection signal="powerup_eaten" from="BaseMaze" to="." method="_on_base_maze_powerup_eaten"]
 [connection signal="score_added" from="BaseMaze" to="." method="_on_base_maze_score_added"]

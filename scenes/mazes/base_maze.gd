@@ -7,6 +7,7 @@ const FRUIT_SPAWN_LOCATION := Vector2(224, 248)
 signal score_added(score: int)
 signal powerup_eaten
 signal level_ended
+signal cruise_elroy_triggered
 
 var _fruit_scene: PackedScene = preload("res://scenes/edibles/fruit/fruit.tscn")
 var _pellet_scene: PackedScene = preload("res://scenes/edibles/pellet/pellet.tscn")
@@ -21,15 +22,6 @@ var _total_pellets := 0
 func _ready() -> void:
 	NavigationManager.setup(self)
 	_spawn_pellets()
-
-
-#func _draw() -> void:
-	#var grid := NavigationManager.grid
-	#for x in grid.region.size.x:
-		#for y in grid.region.size.y:
-			#var point := Vector2(x, y)
-			#var color := Color(1.0, 0.388, 0.32, 0.5) if grid.is_point_solid(point) else Color(0.146, 0.878, 0.577, 0.5)
-			#draw_rect(Rect2(point * grid.cell_size, grid.cell_size), color)
 
 
 func is_tile_wall(local_position: Vector2) -> bool:
@@ -89,7 +81,10 @@ func _on_pellet_eaten(score: int) -> void:
 	if pellets_eaten == 25 or pellets_eaten == 170:
 		_spawn_fruit()
 	
-	if pellets_left == 0:
+	if pellets_left < 20:
+		cruise_elroy_triggered.emit()
+	
+	if pellets_left <= 0:
 		level_ended.emit()
 	
 	score_added.emit(score)

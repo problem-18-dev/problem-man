@@ -1,6 +1,21 @@
 [gd_scene format=3 uid="uid://db0b1tyfbdh2s"]
 
 [ext_resource type="Script" uid="uid://df54j0quts6sj" path="res://scenes/managers/ghosts_manager/ghosts_manager.gd" id="1_es002"]
+[ext_resource type="PackedScene" uid="uid://dl671bnuld1gt" path="res://scenes/actors/ghosts/chaser/chaser.tscn" id="2_es002"]
+[ext_resource type="PackedScene" uid="uid://cxgwfqxupdeef" path="res://scenes/actors/ghosts/ignorant/ignorant.tscn" id="3_mfyuv"]
+[ext_resource type="PackedScene" uid="uid://bnl5bti43bjip" path="res://scenes/actors/ghosts/ambusher/ambusher.tscn" id="4_sduj1"]
+[ext_resource type="PackedScene" uid="uid://bm8sl7uj46tea" path="res://scenes/actors/ghosts/fickle/fickle.tscn" id="5_8hpgt"]
 
 [node name="GhostsManager" type="Node2D" unique_id=470176556]
 script = ExtResource("1_es002")
+
+[node name="Chaser" parent="." unique_id=1086585638 instance=ExtResource("2_es002")]
+spawn_cell = 3
+
+[node name="Ignorant" parent="." unique_id=1884365641 instance=ExtResource("3_mfyuv")]
+
+[node name="Ambusher" parent="." unique_id=469316434 instance=ExtResource("4_sduj1")]
+spawn_cell = 1
+
+[node name="Fickle" parent="." unique_id=229582529 instance=ExtResource("5_8hpgt")]
+spawn_cell = 2

@@ -7,7 +7,7 @@ signal hit
 const CELL_SIZE := 16
 
 @export_category("Stats")
-@export var speed := 125.0
+@export var speed := 80.0
 @export_category("Maze")
 @export var maze: Maze
 
@@ -29,6 +29,7 @@ var _available_directions := {
 
 func _ready() -> void:
 	_screen_size = get_viewport_rect().size
+	_determine_speed()
 
 
 func _physics_process(delta: float) -> void:
@@ -54,6 +55,11 @@ func get_two_steps_ahead() -> Vector2:
 func get_four_steps_ahead() -> Vector2:
 	var position_ahead := four_step_ahead_marker.global_position
 	return maze.get_tile_center(position_ahead)
+
+
+func cruise_elroy() -> void:
+	speed = GameConfig.get_player_cruise_elroy_speed()
+	print("Player cruise elroy speed:", speed)
 
 
 func _process_movement(delta: float) -> void:
@@ -93,6 +99,11 @@ func _wrap_position() -> void:
 
 func _die() -> void:
 	queue_free()
+
+
+func _determine_speed() -> void:
+	speed = GameConfig.get_player_speed()
+	print("Player normal speed", speed)
 
 
 func _on_area_entered(edible: Area2D) -> void:

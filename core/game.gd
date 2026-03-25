@@ -22,7 +22,8 @@ func _on_base_maze_score_added(score: int) -> void:
 
 
 func _on_base_maze_level_ended() -> void:
-	get_tree().reload_current_scene()
+	GameManager.next_level()
+	get_tree().call_deferred("reload_current_scene")
 
 
 func _on_base_maze_powerup_eaten() -> void:
@@ -35,6 +36,12 @@ func _on_base_maze_powerup_eaten() -> void:
 	GameManager.enable_frightened_mode()
 	ghosts_manager.enter_frightened()
 	frightened_timer.start()
+
+
+func _on_base_maze_cruise_elroy_triggered() -> void:
+	print("Entering cruise elroy")
+	ghosts_manager.cruise_elroy()
+	player.cruise_elroy()
 
 
 func _on_phase_manager_phase_changed(phase: GameConfig.Phase) -> void:
