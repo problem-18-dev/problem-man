@@ -11,6 +11,7 @@ const CELL_SIZE := 16
 @export_category("Maze")
 @export var maze: Maze
 
+var _can_move := false
 var _screen_size := Vector2.ZERO
 var _direction := Vector2.RIGHT
 var _next_direction := _direction
@@ -33,7 +34,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not maze:
+	if not maze or not _can_move:
 		return
 	
 	_process_movement(delta)
@@ -45,6 +46,10 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		if event.is_action_pressed(direction_key):
 			var next_direction: Vector2 = _available_directions[direction_key]
 			_change_next_direction(next_direction)
+
+
+func start() -> void:
+	_can_move = true
 
 
 func get_two_steps_ahead() -> Vector2:

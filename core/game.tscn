@@ -20,7 +20,14 @@ color = Color(0, 0, 0, 1)
 
 [node name="HUD" parent="." unique_id=16662674 instance=ExtResource("2_sjcnv")]
 
-[node name="FrightenedTimer" type="Timer" parent="." unique_id=1201892014]
+[node name="Timers" type="Node" parent="." unique_id=1937710032]
+
+[node name="GameTimer" type="Timer" parent="Timers" unique_id=797717490]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="FrightenedTimer" type="Timer" parent="Timers" unique_id=1201892014]
 wait_time = 7.0
 one_shot = true
 
@@ -40,7 +47,8 @@ maze = NodePath("../BaseMaze")
 maze = NodePath("../BaseMaze")
 player = NodePath("../Player")
 
-[connection signal="timeout" from="FrightenedTimer" to="." method="_on_frightened_timer_timeout"]
+[connection signal="timeout" from="Timers/GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="Timers/FrightenedTimer" to="." method="_on_frightened_timer_timeout"]
 [connection signal="phase_changed" from="PhaseManager" to="." method="_on_phase_manager_phase_changed"]
 [connection signal="timeout" from="PhaseManager/PhaseTimer" to="PhaseManager" method="_on_phase_timer_timeout"]
 [connection signal="cruise_elroy_triggered" from="BaseMaze" to="." method="_on_base_maze_cruise_elroy_triggered"]

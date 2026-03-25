@@ -41,6 +41,8 @@ var move_points: PackedVector2Array
 var player: Player
 var manager: GhostsManager
 
+var _can_move := false
+
 @onready var nav_preview_line: Line2D = $NavPreviewLine
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite
@@ -53,6 +55,9 @@ func _ready() -> void:
 
 
 func navigate() -> void:
+	if not _can_move:
+		return
+	
 	if move_points.size() <= 0:
 		target_reached = true
 		return
@@ -76,8 +81,12 @@ func die() -> void:
 	eaten.emit(self)
 
 
+func start() -> void:
+	_can_move = true
+
+
 func stop() -> void:
-	state_machine.set_physics_process(false)
+	_can_move = false
 
 
 func find_escape_path() -> void:

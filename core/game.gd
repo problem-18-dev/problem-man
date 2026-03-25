@@ -8,12 +8,11 @@ extends Node
 @onready var ghosts_manager: GhostsManager = $GhostsManager
 @onready var phase_manager: PhaseManager = $PhaseManager
 @onready var player: Player = $Player
-@onready var frightened_timer: Timer = $FrightenedTimer
+@onready var frightened_timer: Timer = $Timers/FrightenedTimer
 
 
 func _ready() -> void:
 	frightened_timer.wait_time = frightened_duration
-	_on_phase_manager_phase_changed(GameConfig.Phase.Scatter)
 
 
 func _on_base_maze_score_added(score: int) -> void:
@@ -46,7 +45,6 @@ func _on_base_maze_cruise_elroy_triggered() -> void:
 
 func _on_phase_manager_phase_changed(phase: GameConfig.Phase) -> void:
 	GameManager.change_phase(phase)
-	hud.change_state_label(GameConfig.PHASES[phase])
 	ghosts_manager.attempt_state(GameConfig.PHASE_TO_GHOST_STATE_MAP[phase])
 
 
@@ -59,3 +57,8 @@ func _on_frightened_timer_timeout() -> void:
 func _on_player_hit() -> void:
 	ghosts_manager.stop_ghosts()
 	phase_manager.pause()
+
+
+func _on_game_timer_timeout() -> void:
+	ghosts_manager.start_ghosts()
+	player.start()

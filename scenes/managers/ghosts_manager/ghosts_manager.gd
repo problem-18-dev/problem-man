@@ -27,6 +27,11 @@ func _ready() -> void:
 			ghost.draw_nav_lines()
 
 
+func start_ghosts() -> void:
+	for ghost: Ghost in ghosts:
+		ghost.start()
+
+
 func stop_ghosts() -> void:
 	for ghost: Ghost in ghosts:
 		ghost.stop()

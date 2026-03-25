@@ -3,7 +3,7 @@ extends Node
 
 var current_score := 0
 var current_level := 1
-var current_phase: GameConfig.Phase
+var current_phase := GameConfig.Phase.Scatter
 var frightened_mode := false
 
 
