@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn435hv35154"
-path="res://.godot/imported/maze_base.png-a17d6c91bcdeedf95bca149bd795287e.ctex"
+uid="uid://c8mud8tribtwg"
+path="res://.godot/imported/pac-man.png-680ad1920b55f8770adde5a813c4b089.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/mazes/sprites/maze_base.png"
-dest_files=["res://.godot/imported/maze_base.png-a17d6c91bcdeedf95bca149bd795287e.ctex"]
+source_file="res://scenes/actors/player/sprites/pac-man.png"
+dest_files=["res://.godot/imported/pac-man.png-680ad1920b55f8770adde5a813c4b089.ctex"]
 
 [params]
 

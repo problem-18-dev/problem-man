@@ -55,6 +55,7 @@ player = NodePath("../Player")
 [connection signal="level_ended" from="BaseMaze" to="." method="_on_base_maze_level_ended"]
 [connection signal="powerup_eaten" from="BaseMaze" to="." method="_on_base_maze_powerup_eaten"]
 [connection signal="score_added" from="BaseMaze" to="." method="_on_base_maze_score_added"]
+[connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 
 [editable path="GhostsManager"]

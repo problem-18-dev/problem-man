@@ -34,14 +34,19 @@ GameManager="*uid://cnu6xrngdvmvf"
 
 window/size/viewport_width=448
 window/size/viewport_height=496
-window/size/window_width_override=1024
-window/size/window_height_override=1024
+window/size/window_width_override=896
+window/size/window_height_override=992
 window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://d0vi3gqeix34y"
+theme/custom_font="uid://6vim3lsopukw"
 
 [input]
 

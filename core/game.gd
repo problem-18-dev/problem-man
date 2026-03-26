@@ -3,6 +3,7 @@ extends Node
 
 @export_group("Game Properties")
 @export var frightened_duration := 7.0
+@export var game_over_duration := 3.5
 
 @onready var hud: CanvasLayer = $HUD
 @onready var ghosts_manager: GhostsManager = $GhostsManager
@@ -38,7 +39,6 @@ func _on_base_maze_powerup_eaten() -> void:
 
 
 func _on_base_maze_cruise_elroy_triggered() -> void:
-	print("Entering cruise elroy")
 	ghosts_manager.cruise_elroy()
 	player.cruise_elroy()
 
@@ -59,6 +59,19 @@ func _on_player_hit() -> void:
 	phase_manager.pause()
 
 
+func _on_player_died() -> void:
+	var lives_left := GameManager.take_life()
+	
+	if lives_left > 0:
+		get_tree().call_deferred("reload_current_scene")
+		return
+	
+	await hud.show_message("Game Over", game_over_duration)
+	GameManager.reset()
+	get_tree().call_deferred("reload_current_scene")
+
+
 func _on_game_timer_timeout() -> void:
 	ghosts_manager.start_ghosts()
 	player.start()
+	phase_manager.start()

@@ -3,7 +3,7 @@ extends Area2D
 
 
 signal eaten(ghost: Ghost)
-signal respawned
+signal respawned(ghost: Ghost)
 
 enum State { Chase, Scatter, Frightened, Eaten }
 enum Corner { TopLeft, TopRight, BottomLeft, BottomRight }
@@ -129,7 +129,6 @@ func draw_nav_lines() -> void:
 
 func _determine_speed() -> void:
 	speed = GameConfig.get_ghost_speed()
-	print("Ghost normal speed:", speed)
 
 
 func _position_to_spawn_cell() -> void:

@@ -19,11 +19,11 @@ func get_ghost_speed() -> float:
 	
 	match current_level:
 		1:
-			return 95
+			return 75
 		2, 3, 4:
-			return 100
+			return 80
 		_:
-			return 105
+			return 85
 
 
 func get_ghost_cruise_elroy_speed() -> float:
@@ -35,11 +35,11 @@ func get_player_speed() -> float:
 	
 	match current_level:
 		1:
-			return 100
-		2, 3, 4:
-			return 105
-		_:
 			return 110
+		2, 3, 4:
+			return 115
+		_:
+			return 120
 
 
 func get_player_cruise_elroy_speed() -> float:

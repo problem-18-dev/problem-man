@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://d0vi3gqeix34y"]
+
+[ext_resource type="FontFile" uid="uid://6vim3lsopukw" path="res://ui/theme/Tiny5-Regular.ttf" id="1_640h2"]
+
+[resource]
+default_font = ExtResource("1_640h2")
+default_font_size = 16

@@ -2,6 +2,7 @@ class_name Player
 extends Area2D
 
 
+signal died
 signal hit
 
 const CELL_SIZE := 16
@@ -22,7 +23,7 @@ var _available_directions := {
 	"move_right": Vector2.RIGHT,
 }
 
-@onready var player_sprite: Sprite2D = $Sprites/PlayerSprite
+@onready var player_sprite: AnimatedSprite2D = $Sprites/PlayerSprite
 @onready var direction_sprite: Sprite2D = $Sprites/DirectionSprite
 @onready var two_step_ahead_marker: Marker2D = $Sprites/PlayerSprite/TwoStepAheadMarker
 @onready var four_step_ahead_marker: Marker2D = $Sprites/PlayerSprite/FourStepAheadMarker
@@ -50,6 +51,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func start() -> void:
 	_can_move = true
+	player_sprite.play("move")
 
 
 func get_two_steps_ahead() -> Vector2:
@@ -103,12 +105,16 @@ func _wrap_position() -> void:
 
 
 func _die() -> void:
+	_can_move = false
+	
+	player_sprite.play("death")
+	await player_sprite.animation_finished
+	died.emit()
 	queue_free()
 
 
 func _determine_speed() -> void:
 	speed = GameConfig.get_player_speed()
-	print("Player normal speed", speed)
 
 
 func _on_area_entered(edible: Area2D) -> void:

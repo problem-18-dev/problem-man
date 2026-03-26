@@ -9,5 +9,3 @@ func enter_cruise_elroy() -> void:
 	# Immediately adjust speed if in appropriate state
 	if is_in_state(Ghost.State.Scatter) or is_in_state(Ghost.State.Chase):
 		current_speed = cruise_elroy_speed
-	
-	print("Chaser cruise elroy speed:", speed)

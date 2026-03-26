@@ -26,7 +26,7 @@ func enter(data := {}) -> void:
 func exit() -> void:
 	ghost.sprite.modulate = Color.WHITE
 	ghost.current_speed = ghost.speed
-	ghost.respawned.emit()
+	ghost.respawned.emit(ghost)
 	_respawning = false
 	_respawn_timer = respawn_timer_fallback
 	ghost.reset_pathing()

@@ -3,8 +3,10 @@ extends Node
 
 var current_score := 0
 var current_level := 1
+var current_lives := 5
 var current_phase := GameConfig.Phase.Scatter
 var frightened_mode := false
+var cruise_elroy := false
 
 
 func add_score(score: int) -> int:
@@ -18,6 +20,24 @@ func next_level() -> void:
 
 func get_current_level() -> int:
 	return current_level
+
+
+func take_life() -> int:
+	current_lives -= 1
+	return get_current_lives()
+
+
+func get_current_lives() -> int:
+	return current_lives
+
+
+func reset() -> void:
+	current_score = 0
+	current_level = 1
+	current_lives = 5
+	current_phase = GameConfig.Phase.Scatter
+	frightened_mode = false
+	cruise_elroy = false
 
 
 func change_phase(phase: GameConfig.Phase) -> GameConfig.Phase:

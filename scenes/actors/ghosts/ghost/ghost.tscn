@@ -44,7 +44,7 @@ shape = SubResource("RectangleShape2D_bd7np")
 
 [node name="Frightened" type="Node" parent="StateMachine" unique_id=1799767154]
 script = ExtResource("4_r8he8")
-frightened_speed = 40.0
+frightened_speed = 35.0
 
 [node name="Eaten" type="Node" parent="StateMachine" unique_id=1008001944]
 script = ExtResource("5_bd7np")
