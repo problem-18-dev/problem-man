@@ -1,6 +1,7 @@
 extends Node
 
 
+var current_level_type := GameConfig.LevelType.CheeseChasers
 var current_score := 0
 var current_level := 1
 var current_lives := 5

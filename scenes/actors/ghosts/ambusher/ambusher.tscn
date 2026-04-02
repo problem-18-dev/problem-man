@@ -5,23 +5,12 @@
 [ext_resource type="Script" uid="uid://6taodusityab" path="res://scenes/actors/ghosts/ambusher/states/ambusher_scatter.gd" id="3_ngau7"]
 [ext_resource type="Script" uid="uid://1vc6lspw65wa" path="res://scenes/actors/ghosts/ambusher/states/ambusher_chase.gd" id="3_wdvf0"]
 
-[sub_resource type="Gradient" id="Gradient_k8xpk"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 0.4755782, 0.87762594, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_vjx0v"]
-gradient = SubResource("Gradient_k8xpk")
-width = 16
-
 [node name="Ambusher" unique_id=1086585638 instance=ExtResource("1_vjx0v")]
 script = ExtResource("2_ngau7")
 speed = 100.0
 
 [node name="NavPreviewLine" parent="." index="0" unique_id=780997796]
 default_color = Color(1, 0.4755782, 0.87762594, 1)
-
-[node name="Sprite" parent="." index="1" unique_id=531749497]
-texture = SubResource("GradientTexture1D_vjx0v")
 
 [node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Scatter")

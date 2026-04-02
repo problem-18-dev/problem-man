@@ -15,21 +15,21 @@ func enter(data := {}) -> void:
 	if data.size() > 0:
 		assert(data.respawn_timer, "Respawn timer not provided even though object exists.")
 		_respawn_timer = data.respawn_timer
-		
-	ghost.sprite.modulate = Color(0.173, 0.173, 0.173, 1.0)
+	
 	ghost.current_speed = eaten_speed
+	ghost.change_sprite(Ghost.State.Eaten)
 	
 	_jail_coordinates = Ghost.JAIL_COORDINATES[jail_cell_position]
 	ghost.go_to_jail(NavigationManager.position_to_cell(_jail_coordinates))
 
 
 func exit() -> void:
-	ghost.sprite.modulate = Color.WHITE
 	ghost.current_speed = ghost.speed
 	ghost.respawned.emit(ghost)
 	_respawning = false
 	_respawn_timer = respawn_timer_fallback
 	ghost.reset_pathing()
+	ghost.reset_sprite()
 
 
 func physics_update(_delta: float) -> void:

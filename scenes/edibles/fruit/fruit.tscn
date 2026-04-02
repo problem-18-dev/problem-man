@@ -6,14 +6,6 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_eupse"]
 radius = 4.0
 
-[sub_resource type="Gradient" id="Gradient_eupse"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rdac6"]
-gradient = SubResource("Gradient_eupse")
-width = 12
-
 [node name="Fruit" unique_id=1899775672 instance=ExtResource("1_eupse")]
 script = ExtResource("2_eupse")
 value = 200
@@ -21,10 +13,6 @@ value = 200
 [node name="CollisionShape2D" parent="." index="0" unique_id=2125336078]
 shape = SubResource("CircleShape2D_eupse")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="2" unique_id=1050863202 groups=["edibles"]]
-scale = Vector2(1, 12)
-texture = SubResource("GradientTexture1D_rdac6")
-
-[node name="LifeTimer" type="Timer" parent="." index="3" unique_id=973843067]
+[node name="LifeTimer" type="Timer" parent="." index="2" unique_id=973843067]
 
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

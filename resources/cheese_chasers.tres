@@ -1,0 +1,85 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3 uid="uid://bdownxrmbldkj"]
+
+[ext_resource type="Texture2D" uid="uid://ckjb2vf2jdh18" path="res://scenes/actors/ghosts/ambusher/sprites/mouse_pink.png" id="1_sr50d"]
+[ext_resource type="Texture2D" uid="uid://ccbgnkqtmqn22" path="res://scenes/actors/player/sprites/cheese_ship.png" id="1_u5vjm"]
+[ext_resource type="Script" uid="uid://bb3k3i47yuntn" path="res://resources/level_resource.gd" id="2_op0yy"]
+[ext_resource type="Texture2D" uid="uid://cytek4kkyom6y" path="res://scenes/actors/ghosts/chaser/sprites/mouse_red.png" id="2_v8rmq"]
+[ext_resource type="Texture2D" uid="uid://g546gc614fkq" path="res://scenes/actors/ghosts/fickle/sprites/mouse_blue.png" id="3_j7ia5"]
+[ext_resource type="Texture2D" uid="uid://dcj2ljqmkgwfg" path="res://scenes/edibles/fruit/sprites/green_laser.png" id="4_eck3h"]
+[ext_resource type="Texture2D" uid="uid://dth0okgfly0s8" path="res://scenes/actors/ghosts/ignorant/sprites/mouse_orange.png" id="4_kplpe"]
+[ext_resource type="Texture2D" uid="uid://c58bve2d52m0l" path="res://scenes/edibles/pellet/sprites/cheese_ball.png" id="6_0o8m8"]
+[ext_resource type="Texture2D" uid="uid://cmgm7ah3yfhmc" path="res://scenes/edibles/power_up/sprites/shooting_power_up.png" id="8_bt03o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_op0yy"]
+atlas = ExtResource("1_u5vjm")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klql2"]
+atlas = ExtResource("1_u5vjm")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gr6q"]
+atlas = ExtResource("1_u5vjm")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sr50d"]
+atlas = ExtResource("1_u5vjm")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8rmq"]
+atlas = ExtResource("1_u5vjm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7ia5"]
+atlas = ExtResource("1_u5vjm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kplpe"]
+atlas = ExtResource("1_u5vjm")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u5vjm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_op0yy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klql2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gr6q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sr50d")
+}],
+"loop": false,
+"name": &"death",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8rmq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7ia5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kplpe")
+}],
+"loop": true,
+"name": &"move",
+"speed": 20.0
+}]
+
+[resource]
+script = ExtResource("2_op0yy")
+player_sprite_frames = SubResource("SpriteFrames_u5vjm")
+chaser_sprite = ExtResource("2_v8rmq")
+ambusher_sprite = ExtResource("1_sr50d")
+ignorant_sprite = ExtResource("4_kplpe")
+fickle_sprite = ExtResource("3_j7ia5")
+pellet_sprite = ExtResource("6_0o8m8")
+fruit_sprite = ExtResource("4_eck3h")
+power_up_sprite = ExtResource("8_bt03o")
+metadata/_custom_type_script = "uid://bb3k3i47yuntn"

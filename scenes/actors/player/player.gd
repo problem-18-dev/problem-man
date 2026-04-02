@@ -31,6 +31,7 @@ var _available_directions := {
 
 func _ready() -> void:
 	_screen_size = get_viewport_rect().size
+	_setup()
 	_determine_speed()
 
 
@@ -67,6 +68,11 @@ func get_four_steps_ahead() -> Vector2:
 func cruise_elroy() -> void:
 	speed = GameConfig.get_player_cruise_elroy_speed()
 	print("Player cruise elroy speed:", speed)
+
+
+func _setup() -> void:
+	var level_resource := GameConfig.get_current_level_resource()
+	player_sprite.sprite_frames = level_resource.player_sprite_frames
 
 
 func _process_movement(delta: float) -> void:

@@ -89,6 +89,20 @@ func stop() -> void:
 	_can_move = false
 
 
+func change_sprite(state: Ghost.State) -> void:
+	match state:
+		State.Eaten:
+			sprite.frame = 2
+		State.Frightened:
+			sprite.frame = 1
+		_:
+			sprite.frame = 0
+
+
+func reset_sprite() -> void:
+	sprite.frame = 0
+
+
 func find_escape_path() -> void:
 	var current_cell := NavigationManager.position_to_cell(position)
 	var escape_cell := NavigationManager.get_random_cell()

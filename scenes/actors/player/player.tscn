@@ -79,6 +79,7 @@ shape = SubResource("CircleShape2D_8afob")
 [node name="Sprites" type="Node2D" parent="." unique_id=605879473]
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Sprites" unique_id=2120484924]
+scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_g2g7f")
 animation = &"move"
 

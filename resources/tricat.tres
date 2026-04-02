@@ -1,0 +1,93 @@
+[gd_resource type="Resource" script_class="LevelResource" format=3 uid="uid://c343hir43drum"]
+
+[ext_resource type="Texture2D" uid="uid://b53peylcfy5qw" path="res://scenes/actors/player/sprites/tricat.png" id="1_18c2j"]
+[ext_resource type="Texture2D" uid="uid://cm4pi2ghrgc4" path="res://scenes/edibles/fruit/sprites/big_snack.png" id="1_066we"]
+[ext_resource type="Script" uid="uid://bb3k3i47yuntn" path="res://resources/level_resource.gd" id="1_sqqjd"]
+[ext_resource type="Texture2D" uid="uid://b3g32kkspjg0h" path="res://scenes/edibles/pellet/sprites/snack.png" id="2_nhb7k"]
+[ext_resource type="Texture2D" uid="uid://buvjxjoa43vlw" path="res://scenes/edibles/power_up/sprites/collar.png" id="4_sw83x"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_18c2j"]
+load_path = "res://.godot/imported/witch_pink.png-8783e5bcdce6619dc379b82a9544c685.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1xifw"]
+load_path = "res://.godot/imported/witch_red.png-9986de268e932b9bef49ed3acfe84d00.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_04qmb"]
+load_path = "res://.godot/imported/witch_blue.png-f6df005722c90e8ef80ba07702c8d15e.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_066we"]
+load_path = "res://.godot/imported/witch_orange.png-82aadc6cd642c0f4480c4fe267dcc0fb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18c2j"]
+atlas = ExtResource("1_18c2j")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhb7k"]
+atlas = ExtResource("1_18c2j")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sw83x"]
+atlas = ExtResource("1_18c2j")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sol21"]
+atlas = ExtResource("1_18c2j")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xifw"]
+atlas = ExtResource("1_18c2j")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04qmb"]
+atlas = ExtResource("1_18c2j")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_066we"]
+atlas = ExtResource("1_18c2j")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_18c2j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18c2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhb7k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sw83x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sol21")
+}],
+"loop": false,
+"name": &"death",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xifw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04qmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_066we")
+}],
+"loop": true,
+"name": &"move",
+"speed": 20.0
+}]
+
+[resource]
+script = ExtResource("1_sqqjd")
+player_sprite_frames = SubResource("SpriteFrames_18c2j")
+chaser_sprite = SubResource("CompressedTexture2D_1xifw")
+ambusher_sprite = SubResource("CompressedTexture2D_18c2j")
+ignorant_sprite = SubResource("CompressedTexture2D_066we")
+fickle_sprite = SubResource("CompressedTexture2D_04qmb")
+pellet_sprite = ExtResource("2_nhb7k")
+fruit_sprite = ExtResource("1_066we")
+power_up_sprite = ExtResource("4_sw83x")
+metadata/_custom_type_script = "uid://bb3k3i47yuntn"

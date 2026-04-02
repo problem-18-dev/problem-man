@@ -5,23 +5,12 @@
 [ext_resource type="Script" uid="uid://dchgon410yuxq" path="res://scenes/actors/ghosts/ignorant/states/ignorant_chase.gd" id="3_bqgjy"]
 [ext_resource type="Script" uid="uid://dkayycc4vdv3b" path="res://scenes/actors/ghosts/ignorant/states/ignorant_scatter.gd" id="4_uxiug"]
 
-[sub_resource type="Gradient" id="Gradient_vi7wx"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 0.40392157, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_c6uw6"]
-gradient = SubResource("Gradient_vi7wx")
-width = 16
-
 [node name="Ignorant" unique_id=1086585638 instance=ExtResource("1_vi7wx")]
 script = ExtResource("2_c6uw6")
 speed = 100.0
 
 [node name="NavPreviewLine" parent="." index="0" unique_id=780997796]
 default_color = Color(1, 0.40392157, 0, 1)
-
-[node name="Sprite" parent="." index="1" unique_id=531749497]
-texture = SubResource("GradientTexture1D_c6uw6")
 
 [node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Scatter")

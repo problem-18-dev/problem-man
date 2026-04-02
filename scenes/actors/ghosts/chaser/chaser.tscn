@@ -4,14 +4,7 @@
 [ext_resource type="Script" uid="uid://dos5tv0apfwf3" path="res://scenes/actors/ghosts/chaser/chaser.gd" id="2_cmls4"]
 [ext_resource type="Script" uid="uid://rk08rda6o1j6" path="res://scenes/actors/ghosts/chaser/states/chaser_chase.gd" id="2_rwdam"]
 [ext_resource type="Script" uid="uid://e8vwef8uny6b" path="res://scenes/actors/ghosts/chaser/states/chaser_scatter.gd" id="3_45bs7"]
-
-[sub_resource type="Gradient" id="Gradient_fngwq"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.9882353, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_yu7o2"]
-gradient = SubResource("Gradient_fngwq")
-width = 16
+[ext_resource type="Texture2D" uid="uid://mmk0l51jjay7" path="res://scenes/actors/ghosts/chaser/sprites/witch_red.png" id="3_eefqh"]
 
 [node name="Chaser" unique_id=1086585638 instance=ExtResource("1_yu7o2")]
 script = ExtResource("2_cmls4")
@@ -21,7 +14,7 @@ speed = 100.0
 default_color = Color(0.9882353, 0, 0, 1)
 
 [node name="Sprite" parent="." index="1" unique_id=531749497]
-texture = SubResource("GradientTexture1D_yu7o2")
+texture = ExtResource("3_eefqh")
 
 [node name="StateMachine" parent="." index="3" unique_id=1128070307 node_paths=PackedStringArray("initial_state")]
 initial_state = NodePath("Scatter")

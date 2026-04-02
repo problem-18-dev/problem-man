@@ -9,8 +9,6 @@ signal powerup_eaten
 signal level_ended
 signal cruise_elroy_triggered
 
-@export var maze_resource: Tricat
-
 var _fruit_scene: PackedScene = preload("res://scenes/edibles/fruit/fruit.tscn")
 var _pellet_scene: PackedScene = preload("res://scenes/edibles/pellet/pellet.tscn")
 var _powerup_scene: PackedScene = preload("res://scenes/edibles/power_up/power_up.tscn")
@@ -24,17 +22,6 @@ var _total_pellets := 0
 func _ready() -> void:
 	NavigationManager.setup(self)
 	_spawn_pellets()
-
-var test := false
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		if test:
-			tile_set.get_source(0).texture = maze_resource.maze_texture
-		else:
-			tile_set.get_source(0).texture = load("res://scenes/mazes/sprites/classic.png")
-		
-		test = not test
 
 
 func is_tile_wall(local_position: Vector2) -> bool:
@@ -77,10 +64,6 @@ func _spawn_pellets() -> void:
 				power_ups.add_child(powerup)
 	
 	_total_pellets = pellets.get_child_count()
-
-
-func _adjust_maze_texture() -> void:
-	tile_set.get_source(0).texture = maze_resource.maze_texture
 
 
 func _on_powerup_eaten() -> void:

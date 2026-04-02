@@ -10,4 +10,4 @@ script = ExtResource("1_8waoh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2125336078]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=691786392]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1197245678]
