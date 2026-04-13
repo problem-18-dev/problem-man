@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn435hv35154"
-path="res://.godot/imported/classic.png-6c038c7f6fb0ccc5214c8fc35ca15509.ctex"
+uid="uid://be4vj3p4kw5u"
+path="res://.godot/imported/classic_red.png-1b27ef7911f1a627e8ca37f7c27b4d4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/mazes/sprites/classic.png"
-dest_files=["res://.godot/imported/classic.png-6c038c7f6fb0ccc5214c8fc35ca15509.ctex"]
+source_file="res://scenes/actors/ghosts/chaser/sprites/classic_red.png"
+dest_files=["res://.godot/imported/classic_red.png-1b27ef7911f1a627e8ca37f7c27b4d4b.ctex"]
 
 [params]
 

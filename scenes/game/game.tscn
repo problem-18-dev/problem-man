@@ -1,22 +1,17 @@
 [gd_scene format=3 uid="uid://drapp5yqpmc3x"]
 
 [ext_resource type="PackedScene" uid="uid://cmhu8r4sq11d0" path="res://scenes/mazes/base_maze.tscn" id="1_8xnxh"]
-[ext_resource type="Script" uid="uid://dfs5ettoxvpj" path="res://core/game.gd" id="1_a04qp"]
+[ext_resource type="Script" uid="uid://dfs5ettoxvpj" path="res://scenes/game/game.gd" id="1_a04qp"]
 [ext_resource type="PackedScene" uid="uid://dvuo38cya8due" path="res://scenes/actors/player/player.tscn" id="2_a04qp"]
 [ext_resource type="PackedScene" uid="uid://bmwn22xpbwwue" path="res://ui/hud/hud.tscn" id="2_sjcnv"]
+[ext_resource type="PackedScene" uid="uid://5lryash825pv" path="res://scenes/level/background.tscn" id="2_vhpdd"]
 [ext_resource type="Script" uid="uid://dd0q4to73e72p" path="res://scripts/managers/phase_manager.gd" id="3_cjuek"]
 [ext_resource type="PackedScene" uid="uid://db0b1tyfbdh2s" path="res://scenes/managers/ghosts_manager/ghosts_manager.tscn" id="3_sjcnv"]
 
 [node name="Game" type="Node" unique_id=548363564]
 script = ExtResource("1_a04qp")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1512653639]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
+[node name="Background" parent="." unique_id=580293437 instance=ExtResource("2_vhpdd")]
 
 [node name="HUD" parent="." unique_id=16662674 instance=ExtResource("2_sjcnv")]
 

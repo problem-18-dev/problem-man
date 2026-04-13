@@ -21,6 +21,7 @@ var _total_pellets := 0
 
 func _ready() -> void:
 	NavigationManager.setup(self)
+	_change_maze()
 	_spawn_pellets()
 
 
@@ -34,6 +35,11 @@ func is_tile_wall(local_position: Vector2) -> bool:
 func get_tile_center(local_position: Vector2) -> Vector2:
 	var cell := local_to_map(local_position)
 	return map_to_local(cell)
+
+
+func _change_maze() -> void:
+	var level_resource := GameConfig.get_current_level_resource()
+	tile_set.get_source(2).texture = level_resource.maze_texture
 
 
 func _spawn_fruit() -> void:

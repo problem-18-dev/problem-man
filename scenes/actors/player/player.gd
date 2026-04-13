@@ -14,6 +14,7 @@ const CELL_SIZE := 16
 
 var _can_move := false
 var _screen_size := Vector2.ZERO
+var _allow_rotation := false
 var _direction := Vector2.RIGHT
 var _next_direction := _direction
 var _available_directions := {
@@ -73,6 +74,7 @@ func cruise_elroy() -> void:
 func _setup() -> void:
 	var level_resource := GameConfig.get_current_level_resource()
 	player_sprite.sprite_frames = level_resource.player_sprite_frames
+	_allow_rotation = level_resource.player_allow_rotation
 
 
 func _process_movement(delta: float) -> void:
@@ -88,7 +90,7 @@ func _process_movement(delta: float) -> void:
 		
 		if not is_next_direction_cell_wall:
 			_direction = _next_direction
-			player_sprite.rotation = _next_direction.angle()
+			_orient_sprite(_next_direction)
 		elif is_direction_cell_wall:
 			_direction = Vector2.ZERO
 	
@@ -101,13 +103,21 @@ func _change_next_direction(new_direction: Vector2) -> void:
 	var is_opposite := is_zero_approx((_direction + _next_direction).length())
 	if is_opposite:
 		_direction = new_direction
-		player_sprite.rotation = new_direction.angle()
+		_orient_sprite(new_direction)
 	
 	direction_sprite.rotation = new_direction.angle()
 
 
 func _wrap_position() -> void:
 	position.x = wrapf(position.x, 0, _screen_size.x)
+
+
+func _orient_sprite(new_direction: Vector2) -> void:
+	if _allow_rotation:
+		player_sprite.rotation = new_direction.angle()
+		return
+	
+	player_sprite.flip_h = new_direction == Vector2.LEFT
 
 
 func _die() -> void:

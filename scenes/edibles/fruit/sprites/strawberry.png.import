@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkrsttijqptrm"
-path="res://.godot/imported/mouse_blue.png-9667f28214d24b85c9e7b6394ac98b66.ctex"
+uid="uid://btyx1bvf3umti"
+path="res://.godot/imported/strawberry.png-e4264115c18798fdc581192070b65868.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/ghosts/fickle/sprites/mouse_blue.png"
-dest_files=["res://.godot/imported/mouse_blue.png-9667f28214d24b85c9e7b6394ac98b66.ctex"]
+source_file="res://scenes/edibles/fruit/sprites/strawberry.png"
+dest_files=["res://.godot/imported/strawberry.png-e4264115c18798fdc581192070b65868.ctex"]
 
 [params]
 

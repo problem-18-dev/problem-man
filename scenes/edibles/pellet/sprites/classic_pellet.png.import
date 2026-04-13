@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkrsttijqptrm"
-path="res://.godot/imported/mouse_blue.png-9667f28214d24b85c9e7b6394ac98b66.ctex"
+uid="uid://cqhsersl52a7"
+path="res://.godot/imported/classic_pellet.png-2970019bd844c38970713d4b5063fff7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/ghosts/fickle/sprites/mouse_blue.png"
-dest_files=["res://.godot/imported/mouse_blue.png-9667f28214d24b85c9e7b6394ac98b66.ctex"]
+source_file="res://scenes/edibles/pellet/sprites/classic_pellet.png"
+dest_files=["res://.godot/imported/classic_pellet.png-2970019bd844c38970713d4b5063fff7.ctex"]
 
 [params]
 

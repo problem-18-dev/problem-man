@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkrsttijqptrm"
-path="res://.godot/imported/mouse_blue.png-9667f28214d24b85c9e7b6394ac98b66.ctex"
+uid="uid://fjh7e6kq5o7i"
+path="res://.godot/imported/classic_blue.png-837ed791d95c93dcb217ec3738c121e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/ghosts/fickle/sprites/mouse_blue.png"
-dest_files=["res://.godot/imported/mouse_blue.png-9667f28214d24b85c9e7b6394ac98b66.ctex"]
+source_file="res://scenes/actors/ghosts/fickle/sprites/classic_blue.png"
+dest_files=["res://.godot/imported/classic_blue.png-837ed791d95c93dcb217ec3738c121e1.ctex"]
 
 [params]
 

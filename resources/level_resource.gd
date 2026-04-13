@@ -3,8 +3,12 @@ extends Resource
 
 @export_group("Player")
 @export var player_sprite_frames: SpriteFrames
+@export var player_allow_rotation := false
 
 @export_group("Ghosts")
+@export_subgroup("Common")
+@export var ghost_allow_flip := false
+@export var ghost_allow_rotation := false
 @export_subgroup("Chaser")
 @export var chaser_sprite: Texture2D
 
@@ -25,3 +29,7 @@ extends Resource
 
 @export_group("PowerUps")
 @export var power_up_sprite: Texture2D
+
+@export_group("Maze")
+@export var maze_texture: Texture2D
+@export var maze_background_color: Color

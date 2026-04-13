@@ -7,7 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://cl1aufpmrh14m" path="res://scenes/actors/ghosts/fickle/sprites/bike_blue.png" id="3_nnffa"]
 [ext_resource type="Texture2D" uid="uid://cvi5yy51ofh3l" path="res://scenes/edibles/fruit/sprites/urinal.png" id="4_1jpln"]
 [ext_resource type="Texture2D" uid="uid://d1lh3ws1bs4f2" path="res://scenes/actors/ghosts/ignorant/sprites/bike_orange.png" id="4_oum3l"]
-[ext_resource type="Texture2D" uid="uid://dgkhir4m7fpr" path="res://scenes/edibles/pellet/sprites/ball.png" id="6_ygr5m"]
+[ext_resource type="Texture2D" uid="uid://2ps7irvbvi6x" path="res://scenes/mazes/sprites/i_need_to_go_maze.png" id="6_1jpln"]
+[ext_resource type="Texture2D" uid="uid://cwaaanq56qwj3" path="res://scenes/edibles/pellet/sprites/ball.png" id="6_ygr5m"]
 [ext_resource type="Texture2D" uid="uid://d0sovxrlapab" path="res://scenes/edibles/power_up/sprites/urinal_open.png" id="8_ols66"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w2p4p"]
@@ -75,6 +76,8 @@ animations = [{
 [resource]
 script = ExtResource("2_h3vbo")
 player_sprite_frames = SubResource("SpriteFrames_w2p4p")
+player_allow_rotation = true
+ghost_allow_rotation = true
 chaser_sprite = ExtResource("2_xq8rk")
 ambusher_sprite = ExtResource("1_o6v4x")
 ignorant_sprite = ExtResource("4_oum3l")
@@ -82,4 +85,6 @@ fickle_sprite = ExtResource("3_nnffa")
 pellet_sprite = ExtResource("6_ygr5m")
 fruit_sprite = ExtResource("4_1jpln")
 power_up_sprite = ExtResource("8_ols66")
+maze_texture = ExtResource("6_1jpln")
+maze_background_color = Color(0.39607844, 0.1254902, 0.3137255, 1)
 metadata/_custom_type_script = "uid://bb3k3i47yuntn"

@@ -42,6 +42,8 @@ var player: Player
 var manager: GhostsManager
 
 var _can_move := false
+var _can_flip := false
+var _can_rotate := false
 
 @onready var nav_preview_line: Line2D = $NavPreviewLine
 @onready var state_machine: StateMachine = $StateMachine
@@ -49,6 +51,7 @@ var _can_move := false
 
 
 func _ready() -> void:
+	_setup()
 	_determine_speed()
 	_position_to_spawn_cell()
 	await owner.ready
@@ -70,6 +73,7 @@ func navigate() -> void:
 	target_reached = false
 	var next_position := move_points[move_pointer + 1]
 	var direction := (next_position - position).normalized()
+	_rotate_sprite(direction)
 	position += direction * current_speed * get_physics_process_delta_time()
 	
 	if position.distance_to(next_position) < current_speed / 100:
@@ -141,6 +145,12 @@ func draw_nav_lines() -> void:
 	nav_preview_line.show()
  
 
+func _setup() -> void:
+	var level_resource := GameConfig.get_current_level_resource()
+	_can_flip = level_resource.ghost_allow_flip
+	_can_rotate = level_resource.ghost_allow_rotation
+
+
 func _determine_speed() -> void:
 	speed = GameConfig.get_ghost_speed()
 
@@ -148,3 +158,12 @@ func _determine_speed() -> void:
 func _position_to_spawn_cell() -> void:
 	var coordinates: Vector2 = JAIL_COORDINATES[spawn_cell]
 	position = coordinates
+
+
+func _rotate_sprite(direction: Vector2) -> void:
+	if _can_flip:
+		sprite.flip_h = direction == Vector2.RIGHT
+		return
+	
+	if _can_rotate:
+		sprite.rotation = direction.angle()

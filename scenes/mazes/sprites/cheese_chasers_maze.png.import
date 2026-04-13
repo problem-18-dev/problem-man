@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bkrsttijqptrm"
-path="res://.godot/imported/mouse_blue.png-9667f28214d24b85c9e7b6394ac98b66.ctex"
+uid="uid://clsrf55u8rf0h"
+path="res://.godot/imported/cheese_chasers_maze.png-70cc35cd8bcb0c0dde031247b17746b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/actors/ghosts/fickle/sprites/mouse_blue.png"
-dest_files=["res://.godot/imported/mouse_blue.png-9667f28214d24b85c9e7b6394ac98b66.ctex"]
+source_file="res://scenes/mazes/sprites/cheese_chasers_maze.png"
+dest_files=["res://.godot/imported/cheese_chasers_maze.png-70cc35cd8bcb0c0dde031247b17746b7.ctex"]
 
 [params]
 
