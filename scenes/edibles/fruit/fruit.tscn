@@ -9,7 +9,7 @@ radius = 4.0
 
 [node name="Fruit" unique_id=1899775672 instance=ExtResource("1_eupse")]
 script = ExtResource("2_eupse")
-value = 200
+value = 800
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=2125336078]
 shape = SubResource("CircleShape2D_eupse")

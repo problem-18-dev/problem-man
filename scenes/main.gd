@@ -14,17 +14,11 @@ var scenes := {
 }
 
 var current_scene: Node
-var level_types := GameConfig.LEVEL_RESOURCES.keys()
 
 
 func _ready() -> void:
 	GameManager.main = self
 	load_scene(first_scene)
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		_toggle_level_resource()
 
 
 func unload_scene() -> void:
@@ -40,15 +34,3 @@ func load_scene(scene: Scene) -> void:
 	current_scene = new_scene.instantiate()
 	add_child(current_scene)
 	scene_changed.emit(scene)
-
-
-var pointer := 1
-
-
-func _toggle_level_resource() -> void:
-	if pointer == level_types.size():
-		pointer = 0
-	
-	GameManager.current_level_type = level_types[pointer]
-	pointer += 1
-	load_scene(Scene.Game)

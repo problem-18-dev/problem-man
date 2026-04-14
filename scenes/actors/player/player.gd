@@ -68,7 +68,6 @@ func get_four_steps_ahead() -> Vector2:
 
 func cruise_elroy() -> void:
 	speed = GameConfig.get_player_cruise_elroy_speed()
-	print("Player cruise elroy speed:", speed)
 
 
 func _setup() -> void:
@@ -140,6 +139,7 @@ func _on_area_entered(edible: Area2D) -> void:
 	if edible is Ghost:
 		if edible.is_in_state(Ghost.State.Frightened):
 			edible.die()
+			return
 		
 		if not edible.is_in_state(Ghost.State.Eaten):
 			hit.emit()

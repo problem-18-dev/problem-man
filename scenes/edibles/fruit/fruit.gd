@@ -1,8 +1,6 @@
 extends Pellet
 
 
-const SCORE_VALUE := 800
-
 @onready var duration := randf_range(9, 10)
 @onready var life_timer: Timer = $LifeTimer
 @onready var score_label: Label = $ScoreLabel
@@ -19,7 +17,7 @@ func eat() -> void:
 	eaten.emit(value)
 	sprite.modulate = Color.TRANSPARENT
 	collision_shape_2d.set_deferred("disabled", true)
-	score_label.start(SCORE_VALUE, true)
+	score_label.start(value, true)
 
 
 func _on_life_timer_timeout() -> void:

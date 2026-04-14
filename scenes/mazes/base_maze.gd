@@ -87,7 +87,7 @@ func _on_pellet_eaten(score: int) -> void:
 	if pellets_eaten == 25 or pellets_eaten == 170:
 		_spawn_fruit()
 	
-	if pellets_left < 20:
+	if pellets_left < 20 and not GameManager.cruise_elroy:
 		cruise_elroy_triggered.emit()
 	
 	if pellets_left <= 1:

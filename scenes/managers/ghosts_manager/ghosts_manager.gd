@@ -97,11 +97,11 @@ func _on_ghost_eaten(ghost: Ghost) -> void:
 	else:
 		var respawn_timer := EATEN_TIMERS[_eaten_ghosts]
 		ghost.change_state(Ghost.State.Eaten, { "score": score, "respawn_timer": respawn_timer })
-		_eaten_ghosts += 1
+		_eaten_ghosts = min(4, _eaten_ghosts + 1)
 
 
 func _on_ghost_respawned(ghost: Ghost) -> void:
 	if ghost is Chaser:
 		return
 	
-	_eaten_ghosts -= 1
+	_eaten_ghosts = max(0, _eaten_ghosts - 1)

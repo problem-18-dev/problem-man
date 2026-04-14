@@ -28,7 +28,7 @@ func setup(maze: Maze) -> void:
 
 
 func position_to_cell(local_position: Vector2) -> Vector2:
-	return local_position / grid.cell_size
+	return (local_position / grid.cell_size).floor()
 
 
 func get_random_cell() -> Vector2:
