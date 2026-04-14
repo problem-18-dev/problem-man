@@ -13,8 +13,11 @@ var _jail_coordinates: Vector2
 
 func enter(data := {}) -> void:
 	if data.size() > 0:
-		assert(data.respawn_timer, "Respawn timer not provided even though object exists.")
-		_respawn_timer = data.respawn_timer
+		if data.score:
+			_tween_score(data.score)
+			
+		if data.has("respawn_timer"):
+			_respawn_timer = data.respawn_timer
 	
 	ghost.current_speed = eaten_speed
 	ghost.change_sprite(Ghost.State.Eaten)
@@ -51,3 +54,7 @@ func _respawn() -> void:
 
 func _start() -> void:
 	finished.emit("Scatter")
+
+
+func _tween_score(score: int) -> void:
+	ghost.score_label.start(score)

@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b68fsmrn7rphl"]
+
+[ext_resource type="Script" uid="uid://uutm62hp1e61" path="res://scenes/hud/score_label.gd" id="1_gjaur"]
+
+[node name="ScoreLabel" type="Label" unique_id=92947756]
+top_level = true
+offset_right = 48.0
+offset_bottom = 18.0
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_gjaur")

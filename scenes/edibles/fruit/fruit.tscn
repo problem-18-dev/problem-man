@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://qm2i223s7lvl" path="res://scenes/edibles/edible/edible.tscn" id="1_eupse"]
 [ext_resource type="Script" uid="uid://bslulro3ubj5k" path="res://scenes/edibles/fruit/fruit.gd" id="2_eupse"]
+[ext_resource type="PackedScene" uid="uid://b68fsmrn7rphl" path="res://scenes/hud/score_label.tscn" id="3_rdac6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eupse"]
 radius = 4.0
@@ -14,5 +15,7 @@ value = 200
 shape = SubResource("CircleShape2D_eupse")
 
 [node name="LifeTimer" type="Timer" parent="." index="2" unique_id=973843067]
+
+[node name="ScoreLabel" parent="." index="3" unique_id=92947756 instance=ExtResource("3_rdac6")]
 
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

@@ -30,6 +30,8 @@ const JAIL_COORDINATES := {
 	JailCell.Out: Vector2(224, 184),
 }
 
+const BASE_SCORE := 200
+
 @export_group("Properties")
 @export var speed := 75.0
 @export var spawn_cell: JailCell
@@ -48,6 +50,7 @@ var _can_rotate := false
 @onready var nav_preview_line: Line2D = $NavPreviewLine
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = $Sprite
+@onready var score_label: Label = $ScoreLabel
 
 
 func _ready() -> void:

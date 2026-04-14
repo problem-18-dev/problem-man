@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://lt06bm8cwm7o"]
 
 [ext_resource type="Script" uid="uid://dh2lur6087ntr" path="res://scenes/actors/ghosts/ghost/ghost.gd" id="1_dy8p8"]
+[ext_resource type="PackedScene" uid="uid://b68fsmrn7rphl" path="res://scenes/hud/score_label.tscn" id="2_bd7np"]
 [ext_resource type="PackedScene" uid="uid://bv57113kyh2ga" path="res://scenes/state_machine/state_machine.tscn" id="2_lrge8"]
 [ext_resource type="Script" uid="uid://bpqljyo15p2wk" path="res://scenes/actors/ghosts/ghost/states/frightened.gd" id="4_r8he8"]
 [ext_resource type="Script" uid="uid://babijmgfoedq6" path="res://scenes/actors/ghosts/ghost/states/eaten.gd" id="5_bd7np"]
@@ -25,6 +26,8 @@ hframes = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=668550691]
 shape = SubResource("RectangleShape2D_bd7np")
+
+[node name="ScoreLabel" parent="." unique_id=92947756 instance=ExtResource("2_bd7np")]
 
 [node name="StateMachine" parent="." unique_id=1128070307 instance=ExtResource("2_lrge8")]
 
