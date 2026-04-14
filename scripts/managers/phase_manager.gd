@@ -15,6 +15,7 @@ var _current_timings
 
 func _ready() -> void:
 	_current_timings = _get_phase_timer(GameManager.get_current_level())
+	GameManager.reset_phase()
 
 
 func start() -> void:

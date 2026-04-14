@@ -12,10 +12,6 @@ extends Node
 @onready var frightened_timer: Timer = $Timers/FrightenedTimer
 
 
-func _ready() -> void:
-	frightened_timer.wait_time = frightened_duration
-
-
 func _on_base_maze_score_added(score: int) -> void:
 	var new_score := GameManager.add_score(score)
 	hud.change_score(new_score)
@@ -28,14 +24,14 @@ func _on_base_maze_level_ended() -> void:
 
 func _on_base_maze_powerup_eaten() -> void:
 	if GameManager.frightened_mode:
-		frightened_timer.start()
 		ghosts_manager.enter_frightened()
+		frightened_timer.start()
 		return
 	
 	phase_manager.pause()
+	frightened_timer.start()
 	GameManager.enable_frightened_mode()
 	ghosts_manager.enter_frightened()
-	frightened_timer.start()
 
 
 func _on_base_maze_cruise_elroy_triggered() -> void:

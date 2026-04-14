@@ -48,6 +48,10 @@ func change_phase(phase: GameConfig.Phase) -> GameConfig.Phase:
 	return get_current_phase()
 
 
+func reset_phase() -> void:
+	current_phase = GameConfig.Phase.Scatter
+
+
 func get_current_phase() -> GameConfig.Phase:
 	return current_phase
 

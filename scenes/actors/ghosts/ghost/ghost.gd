@@ -105,6 +105,7 @@ func change_sprite(state: Ghost.State) -> void:
 
 func reset_sprite() -> void:
 	sprite.frame = 0
+	sprite.modulate = Color.WHITE
 
 
 func find_escape_path() -> void:

@@ -38,6 +38,10 @@ shape = SubResource("RectangleShape2D_bd7np")
 script = ExtResource("4_r8he8")
 frightened_speed = 35.0
 
+[node name="BlinkTimer" type="Timer" parent="StateMachine/Frightened" unique_id=727739269]
+
 [node name="Eaten" type="Node" parent="StateMachine" unique_id=1008001944]
 script = ExtResource("5_bd7np")
 eaten_speed = 150.0
+
+[connection signal="timeout" from="StateMachine/Frightened/BlinkTimer" to="StateMachine/Frightened" method="_on_blink_timer_timeout"]
