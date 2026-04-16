@@ -9,6 +9,8 @@ signal powerup_eaten
 signal level_ended
 signal cruise_elroy_triggered
 
+@export var spawn_pellets := true
+
 var _fruit_scene: PackedScene = preload("res://scenes/edibles/fruit/fruit.tscn")
 var _pellet_scene: PackedScene = preload("res://scenes/edibles/pellet/pellet.tscn")
 var _powerup_scene: PackedScene = preload("res://scenes/edibles/power_up/power_up.tscn")
@@ -38,7 +40,7 @@ func get_tile_center(local_position: Vector2) -> Vector2:
 
 
 func _change_maze() -> void:
-	var level_resource := GameConfig.get_current_level_resource()
+	var level_resource := GameManager.get_current_level_resource()
 	tile_set.get_source(2).texture = level_resource.maze_texture
 
 
@@ -53,6 +55,9 @@ func _spawn_fruit() -> void:
 
 
 func _spawn_pellets() -> void:
+	if not spawn_pellets:
+		return
+	
 	for cell in get_used_cells():
 		var cell_data := get_cell_tile_data(cell)
 		if cell_data:

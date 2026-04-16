@@ -71,7 +71,7 @@ func cruise_elroy() -> void:
 
 
 func _setup() -> void:
-	var level_resource := GameConfig.get_current_level_resource()
+	var level_resource := GameManager.get_current_level_resource()
 	player_sprite.sprite_frames = level_resource.player_sprite_frames
 	_allow_rotation = level_resource.player_allow_rotation
 

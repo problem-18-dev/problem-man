@@ -12,6 +12,18 @@ extends Node
 @onready var frightened_timer: Timer = $Timers/FrightenedTimer
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		var is_paused := get_tree().paused
+		if is_paused:
+			hud.unpause_game()
+			get_tree().paused = false
+			return
+		
+		hud.pause_game()
+		get_tree().paused = true
+
+
 func _on_base_maze_score_added(score: int) -> void:
 	var new_score := GameManager.add_score(score)
 	hud.change_score(new_score)
@@ -19,7 +31,6 @@ func _on_base_maze_score_added(score: int) -> void:
 
 func _on_base_maze_level_ended() -> void:
 	GameManager.next_level()
-	get_tree().call_deferred("reload_current_scene")
 
 
 func _on_base_maze_powerup_eaten() -> void:
@@ -58,11 +69,12 @@ func _on_player_hit() -> void:
 func _on_player_died() -> void:
 	var lives_left := GameManager.take_life()
 	
-	if lives_left > 0:
-		get_tree().call_deferred("reload_current_scene")
+	if lives_left > 5:
+		GameManager.main.load_scene(Main.Scene.Game)
 		return
 	
-	await hud.show_message("Game Over", game_over_duration)
+	await hud.show_message("GAME OVER", game_over_duration)
+	GameManager.save_high_score()
 	GameManager.reset()
 	get_tree().call_deferred("reload_current_scene")
 

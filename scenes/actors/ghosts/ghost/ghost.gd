@@ -150,9 +150,10 @@ func draw_nav_lines() -> void:
  
 
 func _setup() -> void:
-	var level_resource := GameConfig.get_current_level_resource()
+	var level_resource := GameManager.get_current_level_resource()
 	_can_flip = level_resource.ghost_allow_flip
 	_can_rotate = level_resource.ghost_allow_rotation
+	sprite.apply_scale(Vector2.ONE * level_resource.ghost_scale)
 
 
 func _determine_speed() -> void:

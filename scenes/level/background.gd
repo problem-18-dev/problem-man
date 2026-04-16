@@ -9,5 +9,5 @@ func _ready() -> void:
 
 
 func _change_color() -> void:
-	var level_resource := GameConfig.get_current_level_resource()
+	var level_resource := GameManager.get_current_level_resource()
 	color_rect.color = level_resource.maze_background_color

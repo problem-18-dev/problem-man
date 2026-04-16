@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://clh7g7d7pxbu5"]
+
+[ext_resource type="PackedScene" uid="uid://cmhu8r4sq11d0" path="res://scenes/mazes/base_maze.tscn" id="1_1ch07"]
+[ext_resource type="Script" uid="uid://0t2ng688eeuf" path="res://scenes/ui/main_menu/main_menu.gd" id="1_qt1dd"]
+[ext_resource type="Theme" uid="uid://d0vi3gqeix34y" path="res://ui/theme/main_theme.tres" id="3_5mqxt"]
+[ext_resource type="Texture2D" uid="uid://f2cxuw3vp570" path="res://scenes/ui/main_menu/assets/problem18_normal.png" id="4_8ouhi"]
+[ext_resource type="Texture2D" uid="uid://corhcujykhccf" path="res://scenes/ui/main_menu/assets/problem18_focus.png" id="5_5mqxt"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_52x6y"]
+load_path = "res://.godot/imported/itchio_normal.png-221eeb6919686f0ac3140b1ae01a449a.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r70wa"]
+load_path = "res://.godot/imported/itchio_focus.png-5f8dcfda15bc87e32715396fbac5849a.ctex"
+
+[node name="MainMenu" type="Control" unique_id=200023917]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qt1dd")
+
+[node name="MazeBackground" type="ColorRect" parent="." unique_id=180872484]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Maze" parent="." unique_id=1167720938 instance=ExtResource("1_1ch07")]
+modulate = Color(1, 1, 1, 0.6)
+spawn_pellets = false
+
+[node name="TitleLabel" type="Label" parent="." unique_id=1500182814]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -207.0
+offset_top = 56.0
+offset_right = 207.0
+offset_bottom = 137.0
+grow_horizontal = 2
+mouse_filter = 1
+theme_type_variation = &"TitleLabel"
+text = "Problem-Man"
+
+[node name="HighScoreLabel" type="Label" parent="." unique_id=2106465760]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -32.0
+offset_right = 160.0
+offset_bottom = -5.0
+grow_vertical = 0
+
+[node name="Buttons" type="VBoxContainer" parent="." unique_id=2028314906]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -56.0
+offset_right = 70.0
+offset_bottom = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="StoryButton" type="Button" parent="Buttons" unique_id=1833721207]
+layout_mode = 2
+theme_type_variation = &"PrimaryButton"
+text = "STORY"
+
+[node name="ClassicButton" type="Button" parent="Buttons" unique_id=880209022]
+layout_mode = 2
+theme_type_variation = &"PrimaryButton"
+text = "CLASSIC"
+
+[node name="LinkButtons" type="HBoxContainer" parent="." unique_id=103893506]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+offset_top = -40.0
+offset_right = -16.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 8
+alignment = 2
+
+[node name="Problem18Button" type="TextureButton" parent="LinkButtons" unique_id=1378159293]
+custom_minimum_size = Vector2(24, 36)
+layout_mode = 2
+theme = ExtResource("3_5mqxt")
+texture_normal = ExtResource("4_8ouhi")
+texture_hover = ExtResource("5_5mqxt")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ItchIoButton" type="TextureButton" parent="LinkButtons" unique_id=1998678892]
+custom_minimum_size = Vector2(24, 36)
+layout_mode = 2
+theme = ExtResource("3_5mqxt")
+texture_normal = SubResource("CompressedTexture2D_52x6y")
+texture_hover = SubResource("CompressedTexture2D_r70wa")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Ghosts" type="Control" parent="." unique_id=732257779]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackgroundTimer" type="Timer" parent="." unique_id=1108611411]
+wait_time = 3.0
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1494268741]
+
+[connection signal="mouse_entered" from="TitleLabel" to="." method="_on_title_label_mouse_entered"]
+[connection signal="mouse_exited" from="TitleLabel" to="." method="_on_title_label_mouse_exited"]
+[connection signal="pressed" from="Buttons/StoryButton" to="." method="_on_story_button_pressed"]
+[connection signal="pressed" from="Buttons/ClassicButton" to="." method="_on_classic_button_pressed"]
+[connection signal="pressed" from="LinkButtons/Problem18Button" to="." method="_on_itch_io_button_pressed"]
+[connection signal="pressed" from="LinkButtons/ItchIoButton" to="." method="_on_itch_io_button_pressed"]
+[connection signal="timeout" from="BackgroundTimer" to="." method="_on_background_timer_timeout"]

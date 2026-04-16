@@ -2,12 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://cx5cskfiwff12" path="res://scenes/actors/ghosts/ambusher/sprites/mouse_pink.png" id="1_sr50d"]
 [ext_resource type="Texture2D" uid="uid://ccbgnkqtmqn22" path="res://scenes/actors/player/sprites/cheese_ship.png" id="1_u5vjm"]
-[ext_resource type="Script" uid="uid://bb3k3i47yuntn" path="res://resources/level_resource.gd" id="2_op0yy"]
+[ext_resource type="Script" uid="uid://bb3k3i47yuntn" path="res://resources/level_resource/level_resource.gd" id="2_op0yy"]
 [ext_resource type="Texture2D" uid="uid://csvg8hhdxk1dh" path="res://scenes/actors/ghosts/chaser/sprites/mouse_red.png" id="2_v8rmq"]
 [ext_resource type="Texture2D" uid="uid://bkrsttijqptrm" path="res://scenes/actors/ghosts/fickle/sprites/mouse_blue.png" id="3_j7ia5"]
 [ext_resource type="Texture2D" uid="uid://dcj2ljqmkgwfg" path="res://scenes/edibles/fruit/sprites/green_laser.png" id="4_eck3h"]
 [ext_resource type="Texture2D" uid="uid://offbrdyo38tg" path="res://scenes/actors/ghosts/ignorant/sprites/mouse_orange.png" id="4_kplpe"]
 [ext_resource type="Texture2D" uid="uid://c58bve2d52m0l" path="res://scenes/edibles/pellet/sprites/cheese_ball.png" id="6_0o8m8"]
+[ext_resource type="Texture2D" uid="uid://b3fkpyhp1pf6i" path="res://ui/hud/sprites/cheese_ship.png" id="6_bt03o"]
 [ext_resource type="Texture2D" uid="uid://clsrf55u8rf0h" path="res://scenes/mazes/sprites/cheese_chasers_maze.png" id="6_eck3h"]
 [ext_resource type="Texture2D" uid="uid://cmgm7ah3yfhmc" path="res://scenes/edibles/power_up/sprites/shooting_power_up.png" id="8_bt03o"]
 
@@ -75,9 +76,12 @@ animations = [{
 
 [resource]
 script = ExtResource("2_op0yy")
+name = "Cheese Chasers"
+life_texture = ExtResource("6_bt03o")
 player_sprite_frames = SubResource("SpriteFrames_u5vjm")
 player_allow_rotation = true
 ghost_allow_rotation = true
+ghost_scale = 1.45
 chaser_sprite = ExtResource("2_v8rmq")
 ambusher_sprite = ExtResource("1_sr50d")
 ignorant_sprite = ExtResource("4_kplpe")

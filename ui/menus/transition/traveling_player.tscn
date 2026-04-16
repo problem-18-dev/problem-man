@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ch24ktkn3chrc"]
+
+[ext_resource type="Script" uid="uid://bkr52qf52m5aw" path="res://ui/menus/transition/traveling_player.gd" id="1_olq1t"]
+
+[sub_resource type="Curve" id="Curve_olq1t"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.14817), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[node name="TravelingPlayer" type="Node2D" unique_id=1857792821]
+script = ExtResource("1_olq1t")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2135765059]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1974309760]
+amount = 16
+lifetime = 0.15000000000000002
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector2(0, 0)
+angular_velocity_min = -15.0
+angular_velocity_max = 15.0
+scale_amount_curve = SubResource("Curve_olq1t")

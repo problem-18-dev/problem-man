@@ -19,5 +19,5 @@ func eat() -> void:
 
 
 func _change_sprite() -> void:
-	var level_resource := GameConfig.get_current_level_resource()
+	var level_resource := GameManager.get_current_level_resource()
 	sprite_2d.texture = level_resource.pellet_sprite

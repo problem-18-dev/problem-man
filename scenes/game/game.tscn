@@ -9,13 +9,16 @@
 [ext_resource type="PackedScene" uid="uid://db0b1tyfbdh2s" path="res://scenes/managers/ghosts_manager/ghosts_manager.tscn" id="3_sjcnv"]
 
 [node name="Game" type="Node" unique_id=548363564]
+process_mode = 3
 script = ExtResource("1_a04qp")
 
 [node name="Background" parent="." unique_id=580293437 instance=ExtResource("2_vhpdd")]
 
 [node name="HUD" parent="." unique_id=16662674 instance=ExtResource("2_sjcnv")]
+process_mode = 1
 
 [node name="Timers" type="Node" parent="." unique_id=1937710032]
+process_mode = 1
 
 [node name="GameTimer" type="Timer" parent="Timers" unique_id=797717490]
 wait_time = 3.0
@@ -27,18 +30,22 @@ wait_time = 7.0
 one_shot = true
 
 [node name="PhaseManager" type="Node" parent="." unique_id=1132946865]
+process_mode = 1
 script = ExtResource("3_cjuek")
 
 [node name="PhaseTimer" type="Timer" parent="PhaseManager" unique_id=215625898]
 one_shot = true
 
 [node name="BaseMaze" parent="." unique_id=1167720938 instance=ExtResource("1_8xnxh")]
+process_mode = 1
 
 [node name="Player" parent="." unique_id=1813718993 node_paths=PackedStringArray("maze") instance=ExtResource("2_a04qp")]
+process_mode = 1
 position = Vector2(224, 248)
 maze = NodePath("../BaseMaze")
 
 [node name="GhostsManager" parent="." unique_id=470176556 node_paths=PackedStringArray("maze", "player") instance=ExtResource("3_sjcnv")]
+process_mode = 1
 maze = NodePath("../BaseMaze")
 player = NodePath("../Player")
 
