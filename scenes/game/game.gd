@@ -1,6 +1,9 @@
 extends Node
 
 
+const PLAYER_START_POSITION := Vector2(224, 248)
+const RESET_DELAY := 2.0
+
 @export_group("Game Properties")
 @export var frightened_duration := 7.0
 @export var game_over_duration := 3.5
@@ -10,6 +13,8 @@ extends Node
 @onready var phase_manager: PhaseManager = $PhaseManager
 @onready var player: Player = $Player
 @onready var frightened_timer: Timer = $Timers/FrightenedTimer
+@onready var game_timer: Timer = $Timers/GameTimer
+@onready var start_player: AudioStreamPlayer = $StartPlayer
 
 
 func _input(event: InputEvent) -> void:
@@ -24,9 +29,13 @@ func _input(event: InputEvent) -> void:
 		get_tree().paused = true
 
 
-func _on_base_maze_score_added(score: int) -> void:
+func _add_score(score: int) -> void:
 	var new_score := GameManager.add_score(score)
 	hud.change_score(new_score)
+
+
+func _on_base_maze_score_added(score: int) -> void:
+	_add_score(score)
 
 
 func _on_base_maze_level_ended() -> void:
@@ -69,17 +78,37 @@ func _on_player_hit() -> void:
 func _on_player_died() -> void:
 	var lives_left := GameManager.take_life()
 	
-	if lives_left > 5:
-		GameManager.main.load_scene(Main.Scene.Game)
+	if lives_left <= 0:
+		await hud.show_message("GAME OVER", game_over_duration)
+		GameManager.save_high_score()
+		GameManager.reset()
+		get_tree().call_deferred("reload_current_scene")
 		return
 	
-	await hud.show_message("GAME OVER", game_over_duration)
-	GameManager.save_high_score()
-	GameManager.reset()
-	get_tree().call_deferred("reload_current_scene")
+	_reset_round()
+
+
+func _reset_round() -> void:
+	frightened_timer.stop()
+	GameManager.disable_frightened_mode()
+	
+	player.reset(PLAYER_START_POSITION)
+	ghosts_manager.reset_round()
+	phase_manager.reset()
+	hud.change_lives(GameManager.get_current_lives())
+	
+	await get_tree().create_timer(RESET_DELAY).timeout
+	
+	ghosts_manager.start_ghosts()
+	player.start()
+	phase_manager.start()
 
 
 func _on_game_timer_timeout() -> void:
 	ghosts_manager.start_ghosts()
 	player.start()
 	phase_manager.start()
+
+
+func _on_ghosts_manager_score_added(score: int) -> void:
+	_add_score(score)

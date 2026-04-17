@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cmhu8r4sq11d0" path="res://scenes/mazes/base_maze.tscn" id="1_8xnxh"]
 [ext_resource type="Script" uid="uid://dfs5ettoxvpj" path="res://scenes/game/game.gd" id="1_a04qp"]
+[ext_resource type="AudioStream" uid="uid://b5c1nlqhbr45n" path="res://scenes/game/sounds/start.wav" id="2_87uf6"]
 [ext_resource type="PackedScene" uid="uid://dvuo38cya8due" path="res://scenes/actors/player/player.tscn" id="2_a04qp"]
 [ext_resource type="PackedScene" uid="uid://bmwn22xpbwwue" path="res://ui/hud/hud.tscn" id="2_sjcnv"]
 [ext_resource type="PackedScene" uid="uid://5lryash825pv" path="res://scenes/level/background.tscn" id="2_vhpdd"]
@@ -12,6 +13,10 @@
 process_mode = 3
 script = ExtResource("1_a04qp")
 
+[node name="StartPlayer" type="AudioStreamPlayer" parent="." unique_id=47991488]
+stream = ExtResource("2_87uf6")
+autoplay = true
+
 [node name="Background" parent="." unique_id=580293437 instance=ExtResource("2_vhpdd")]
 
 [node name="HUD" parent="." unique_id=16662674 instance=ExtResource("2_sjcnv")]
@@ -21,7 +26,7 @@ process_mode = 1
 process_mode = 1
 
 [node name="GameTimer" type="Timer" parent="Timers" unique_id=797717490]
-wait_time = 3.0
+wait_time = 4.0
 one_shot = true
 autostart = true
 
@@ -59,5 +64,6 @@ player = NodePath("../Player")
 [connection signal="score_added" from="BaseMaze" to="." method="_on_base_maze_score_added"]
 [connection signal="died" from="Player" to="." method="_on_player_died"]
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
+[connection signal="score_added" from="GhostsManager" to="." method="_on_ghosts_manager_score_added"]
 
 [editable path="GhostsManager"]

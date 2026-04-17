@@ -7,10 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://cxyyg2wyxmpbv" path="res://scenes/actors/ghosts/fickle/sprites/keycap_blue.png" id="3_acw5i"]
 [ext_resource type="Texture2D" uid="uid://7hpyrq5om6kg" path="res://scenes/actors/ghosts/ignorant/sprites/keycap_orange.png" id="4_56em8"]
 [ext_resource type="Texture2D" uid="uid://bws5774echomk" path="res://scenes/edibles/pellet/sprites/keyboard.png" id="4_e66ye"]
+[ext_resource type="AudioStream" uid="uid://b5c1nlqhbr45n" path="res://scenes/game/sounds/start.wav" id="5_3lblv"]
 [ext_resource type="Texture2D" uid="uid://b0kchq40k6bf6" path="res://ui/hud/sprites/ball.png" id="6_2jjv6"]
 [ext_resource type="Texture2D" uid="uid://cwaaanq56qwj3" path="res://scenes/edibles/pellet/sprites/ball.png" id="6_40nvo"]
 [ext_resource type="Texture2D" uid="uid://bbry4ab6p80pg" path="res://scenes/mazes/sprites/keybricks_maze.png" id="6_e66ye"]
+[ext_resource type="AudioStream" uid="uid://c3par75qlxt1f" path="res://scenes/actors/ghosts/sounds/classic_eaten.ogg" id="6_q3bja"]
+[ext_resource type="AudioStream" uid="uid://c5wq0bdg1y10q" path="res://scenes/actors/ghosts/sounds/classic_frightened.ogg" id="7_xu00h"]
 [ext_resource type="Texture2D" uid="uid://b5oifrgqo2oi3" path="res://scenes/edibles/fruit/sprites/gg_letters.png" id="8_2jjv6"]
+[ext_resource type="AudioStream" uid="uid://c7l0v4cfcgw3d" path="res://scenes/actors/ghosts/sounds/classic_normal.ogg" id="8_60mg8"]
+[ext_resource type="AudioStream" uid="uid://cy2i7d6hluw18" path="res://scenes/actors/player/sounds/keybricks_eat_pellet.ogg" id="9_hlah3"]
+[ext_resource type="AudioStream" uid="uid://dkyewyr8rss68" path="res://scenes/actors/player/sounds/keybricks_eat_fruit.ogg" id="9_v7bq4"]
+[ext_resource type="AudioStream" uid="uid://cotwmiqcga8t2" path="res://scenes/actors/player/sounds/keybricks_death.ogg" id="13_ppsc7"]
+[ext_resource type="AudioStream" uid="uid://byvc476hnf6h2" path="res://scenes/actors/player/sounds/ghost_eat.wav" id="15_msfpu"]
+[ext_resource type="AudioStream" uid="uid://cchd01w1ab3e" path="res://scenes/actors/player/sounds/keybricks_eat_power_up.ogg" id="17_8i1gd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1hwte"]
 atlas = ExtResource("1_yuvb3")
@@ -57,7 +66,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 2.0
+"speed": 1.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -77,9 +86,18 @@ animations = [{
 [resource]
 script = ExtResource("2_1hwte")
 name = "Keybricks"
+game_start_sound = ExtResource("5_3lblv")
 life_texture = ExtResource("6_2jjv6")
 player_sprite_frames = SubResource("SpriteFrames_yuvb3")
 player_allow_rotation = true
+player_pellet_sound = ExtResource("9_hlah3")
+player_fruit_sound = ExtResource("9_v7bq4")
+player_power_up_sound = ExtResource("17_8i1gd")
+player_death_sound = ExtResource("13_ppsc7")
+player_ghost_eat_sound = ExtResource("15_msfpu")
+ghost_normal_sound = ExtResource("8_60mg8")
+ghost_frightened_sound = ExtResource("7_xu00h")
+ghost_eaten_sound = ExtResource("6_q3bja")
 chaser_sprite = ExtResource("2_xpfh7")
 ambusher_sprite = ExtResource("1_8pp0c")
 ignorant_sprite = ExtResource("4_56em8")

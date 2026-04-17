@@ -30,6 +30,13 @@ func resume() -> void:
 	phase_timer.paused = false
 
 
+func reset() -> void:
+	phase_timer.stop()
+	phase_timer.paused = false
+	_current_timings = _get_phase_timer(GameManager.get_current_level())
+	GameManager.reset_phase()
+
+
 func _get_phase_timer(level: int) -> Array[float]:
 	match level:
 		1:

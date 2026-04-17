@@ -7,10 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://bkrsttijqptrm" path="res://scenes/actors/ghosts/fickle/sprites/mouse_blue.png" id="3_j7ia5"]
 [ext_resource type="Texture2D" uid="uid://dcj2ljqmkgwfg" path="res://scenes/edibles/fruit/sprites/green_laser.png" id="4_eck3h"]
 [ext_resource type="Texture2D" uid="uid://offbrdyo38tg" path="res://scenes/actors/ghosts/ignorant/sprites/mouse_orange.png" id="4_kplpe"]
+[ext_resource type="AudioStream" uid="uid://b5c1nlqhbr45n" path="res://scenes/game/sounds/start.wav" id="5_25ujp"]
 [ext_resource type="Texture2D" uid="uid://c58bve2d52m0l" path="res://scenes/edibles/pellet/sprites/cheese_ball.png" id="6_0o8m8"]
+[ext_resource type="AudioStream" uid="uid://c3par75qlxt1f" path="res://scenes/actors/ghosts/sounds/classic_eaten.ogg" id="6_8wqx8"]
 [ext_resource type="Texture2D" uid="uid://b3fkpyhp1pf6i" path="res://ui/hud/sprites/cheese_ship.png" id="6_bt03o"]
 [ext_resource type="Texture2D" uid="uid://clsrf55u8rf0h" path="res://scenes/mazes/sprites/cheese_chasers_maze.png" id="6_eck3h"]
+[ext_resource type="AudioStream" uid="uid://c5wq0bdg1y10q" path="res://scenes/actors/ghosts/sounds/classic_frightened.ogg" id="7_gfl0g"]
+[ext_resource type="AudioStream" uid="uid://c7l0v4cfcgw3d" path="res://scenes/actors/ghosts/sounds/classic_normal.ogg" id="8_2hdbq"]
 [ext_resource type="Texture2D" uid="uid://cmgm7ah3yfhmc" path="res://scenes/edibles/power_up/sprites/shooting_power_up.png" id="8_bt03o"]
+[ext_resource type="AudioStream" uid="uid://c8q23hju61sxg" path="res://scenes/actors/player/sounds/cheese_chasers_death.ogg" id="13_frf7l"]
+[ext_resource type="AudioStream" uid="uid://duavd8mwx0wpn" path="res://scenes/actors/player/sounds/cheese_chasers_eat_fruit.ogg" id="14_mb7qx"]
+[ext_resource type="AudioStream" uid="uid://byvc476hnf6h2" path="res://scenes/actors/player/sounds/ghost_eat.wav" id="15_ow7gv"]
+[ext_resource type="AudioStream" uid="uid://bkrflfv2ewagi" path="res://scenes/actors/player/sounds/cheese_chasers_eat_pellet.ogg" id="16_yimtm"]
+[ext_resource type="AudioStream" uid="uid://dtq57x51a6y3h" path="res://scenes/actors/player/sounds/cheese_chasers_eat_power_up.ogg" id="17_jwxip"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_op0yy"]
 atlas = ExtResource("1_u5vjm")
@@ -57,7 +66,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 2.0
+"speed": 1.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -77,11 +86,20 @@ animations = [{
 [resource]
 script = ExtResource("2_op0yy")
 name = "Cheese Chasers"
+game_start_sound = ExtResource("5_25ujp")
 life_texture = ExtResource("6_bt03o")
 player_sprite_frames = SubResource("SpriteFrames_u5vjm")
 player_allow_rotation = true
+player_pellet_sound = ExtResource("16_yimtm")
+player_fruit_sound = ExtResource("14_mb7qx")
+player_power_up_sound = ExtResource("17_jwxip")
+player_death_sound = ExtResource("13_frf7l")
+player_ghost_eat_sound = ExtResource("15_ow7gv")
 ghost_allow_rotation = true
 ghost_scale = 1.45
+ghost_normal_sound = ExtResource("8_2hdbq")
+ghost_frightened_sound = ExtResource("7_gfl0g")
+ghost_eaten_sound = ExtResource("6_8wqx8")
 chaser_sprite = ExtResource("2_v8rmq")
 ambusher_sprite = ExtResource("1_sr50d")
 ignorant_sprite = ExtResource("4_kplpe")

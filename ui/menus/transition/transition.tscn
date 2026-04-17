@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://by51j6kuxfik5" path="res://ui/menus/transition/transition.gd" id="1_mqeh4"]
 [ext_resource type="PackedScene" uid="uid://ch24ktkn3chrc" path="res://ui/menus/transition/traveling_player.tscn" id="2_hsdtx"]
+[ext_resource type="AudioStream" uid="uid://dpk3jwvxl8xqv" path="res://ui/menus/transition/sounds/transition.wav" id="2_mkc18"]
 
 [sub_resource type="Animation" id="Animation_mqeh4"]
 length = 0.001
@@ -66,6 +67,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_mqeh4")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1026357999]
+stream = ExtResource("2_mkc18")
+autoplay = true
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=486274816]
 layout_mode = 1
 anchors_preset = 15
@@ -91,9 +96,6 @@ grow_vertical = 2
 theme_type_variation = &"HeadingLabel"
 text = "Traveling to "
 
-[node name="TravelingPlayer" parent="." unique_id=1857792821 instance=ExtResource("2_hsdtx")]
-position = Vector2(512, 128)
-
 [node name="StarParticles2D" type="CPUParticles2D" parent="." unique_id=1460556416]
 position = Vector2(224, 0)
 amount = 60
@@ -109,6 +111,9 @@ initial_velocity_max = 15.0
 scale_amount_min = 0.75
 scale_amount_max = 1.5
 color = Color(0.3137255, 0.3137255, 0.6039216, 1)
+
+[node name="TravelingPlayer" parent="." unique_id=1857792821 instance=ExtResource("2_hsdtx")]
+position = Vector2(512, 128)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1546130306]
 libraries/ = SubResource("AnimationLibrary_mkc18")

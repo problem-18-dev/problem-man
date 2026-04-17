@@ -4,6 +4,8 @@ extends Resource
 
 @export_group("Level")
 @export var name: String
+@export_subgroup("Sounds")
+@export var game_start_sound: AudioStream
 @export_subgroup("HUD")
 @export var life_texture: Texture2D
 @export var text_color := Color.WHITE
@@ -11,12 +13,22 @@ extends Resource
 @export_group("Player")
 @export var player_sprite_frames: SpriteFrames
 @export var player_allow_rotation := false
+@export_subgroup("Sounds")
+@export var player_pellet_sound: AudioStream
+@export var player_fruit_sound: AudioStream
+@export var player_power_up_sound: AudioStream
+@export var player_death_sound: AudioStream
+@export var player_ghost_eat_sound: AudioStream
 
 @export_group("Ghosts")
 @export_subgroup("Common")
 @export var ghost_allow_flip := false
 @export var ghost_allow_rotation := false
 @export var ghost_scale := 1.25
+@export var ghost_normal_sound: AudioStream
+@export var ghost_frightened_sound: AudioStream
+@export var ghost_eaten_sound: AudioStream
+
 @export_subgroup("Chaser")
 @export var chaser_sprite: Texture2D
 

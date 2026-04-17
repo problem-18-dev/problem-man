@@ -5,12 +5,65 @@
 [ext_resource type="Theme" uid="uid://d0vi3gqeix34y" path="res://ui/theme/main_theme.tres" id="3_5mqxt"]
 [ext_resource type="Texture2D" uid="uid://f2cxuw3vp570" path="res://scenes/ui/main_menu/assets/problem18_normal.png" id="4_8ouhi"]
 [ext_resource type="Texture2D" uid="uid://corhcujykhccf" path="res://scenes/ui/main_menu/assets/problem18_focus.png" id="5_5mqxt"]
+[ext_resource type="Texture2D" uid="uid://be4vj3p4kw5u" path="res://scenes/actors/ghosts/chaser/sprites/classic_red.png" id="6_52x6y"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_52x6y"]
 load_path = "res://.godot/imported/itchio_normal.png-221eeb6919686f0ac3140b1ae01a449a.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_r70wa"]
 load_path = "res://.godot/imported/itchio_focus.png-5f8dcfda15bc87e32715396fbac5849a.ctex"
+
+[sub_resource type="Animation" id="Animation_8ouhi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Maze/Ghost:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(472, 216)]
+}
+
+[sub_resource type="Animation" id="Animation_5mqxt"]
+resource_name = "ghost"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Maze/Ghost:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3, 6, 7.5, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(472, 216), Vector2(344, 216), Vector2(344, 344), Vector2(104, 344), Vector2(104, 216), Vector2(-24, 216)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(10),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"randomize_ghost_sprite"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tk7lu"]
+_data = {
+&"RESET": SubResource("Animation_8ouhi"),
+&"ghost": SubResource("Animation_5mqxt")
+}
 
 [node name="MainMenu" type="Control" unique_id=200023917]
 layout_mode = 3
@@ -30,9 +83,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Maze" parent="." unique_id=1167720938 instance=ExtResource("1_1ch07")]
+[node name="Maze" type="Node2D" parent="." unique_id=1632919048]
 modulate = Color(1, 1, 1, 0.6)
+
+[node name="Maze" parent="Maze" unique_id=1167720938 instance=ExtResource("1_1ch07")]
 spawn_pellets = false
+
+[node name="Ghost" type="Sprite2D" parent="Maze" unique_id=536195551]
+position = Vector2(472, 216)
+texture = ExtResource("6_52x6y")
+hframes = 3
 
 [node name="TitleLabel" type="Label" parent="." unique_id=1500182814]
 layout_mode = 1
@@ -118,16 +178,13 @@ texture_hover = SubResource("CompressedTexture2D_r70wa")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="Ghosts" type="Control" parent="." unique_id=732257779]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="BackgroundTimer" type="Timer" parent="." unique_id=1108611411]
 wait_time = 3.0
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1494268741]
+libraries/ = SubResource("AnimationLibrary_tk7lu")
+autoplay = &"ghost"
 
 [connection signal="mouse_entered" from="TitleLabel" to="." method="_on_title_label_mouse_entered"]
 [connection signal="mouse_exited" from="TitleLabel" to="." method="_on_title_label_mouse_exited"]

@@ -8,9 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://d08b6bxoosoae" path="res://scenes/actors/ghosts/ignorant/sprites/classic_orange.png" id="4_0ogxo"]
 [ext_resource type="Texture2D" uid="uid://btyx1bvf3umti" path="res://scenes/edibles/fruit/sprites/strawberry.png" id="4_hh6l5"]
 [ext_resource type="Texture2D" uid="uid://cqhsersl52a7" path="res://scenes/edibles/pellet/sprites/classic_pellet.png" id="5_4hhpk"]
+[ext_resource type="AudioStream" uid="uid://b5c1nlqhbr45n" path="res://scenes/game/sounds/start.wav" id="5_tj7vc"]
 [ext_resource type="Texture2D" uid="uid://cklv4hv1j6gli" path="res://scenes/actors/player/sprites/player.png" id="6_a1ex2"]
 [ext_resource type="Texture2D" uid="uid://t0hjywevgtev" path="res://scenes/mazes/sprites/classic_maze.png" id="6_bnb64"]
+[ext_resource type="AudioStream" uid="uid://c3par75qlxt1f" path="res://scenes/actors/ghosts/sounds/classic_eaten.ogg" id="6_qou22"]
+[ext_resource type="AudioStream" uid="uid://c5wq0bdg1y10q" path="res://scenes/actors/ghosts/sounds/classic_frightened.ogg" id="7_qou22"]
 [ext_resource type="Texture2D" uid="uid://b23jp12sk0dw3" path="res://scenes/edibles/power_up/sprites/classic_powerup.png" id="8_0ogxo"]
+[ext_resource type="AudioStream" uid="uid://c7l0v4cfcgw3d" path="res://scenes/actors/ghosts/sounds/classic_normal.ogg" id="8_qou22"]
+[ext_resource type="AudioStream" uid="uid://dvuk1vvsm050v" path="res://scenes/actors/player/sounds/classic_eat_fruit.wav" id="9_xg7lm"]
+[ext_resource type="AudioStream" uid="uid://oi82hnddrdo3" path="res://scenes/actors/player/sounds/classic_eat_pellet.ogg" id="10_0molp"]
+[ext_resource type="AudioStream" uid="uid://dcrtqx7s303k" path="res://scenes/actors/player/sounds/classic_death.ogg" id="10_57d00"]
+[ext_resource type="AudioStream" uid="uid://c0477wx27exub" path="res://scenes/actors/player/sounds/classic_eat_powerup.wav" id="11_tj7vc"]
+[ext_resource type="AudioStream" uid="uid://byvc476hnf6h2" path="res://scenes/actors/player/sounds/ghost_eat.wav" id="15_kkhh2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qq7k4"]
 atlas = ExtResource("2_3u6i6")
@@ -40,7 +49,7 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("2_3u6i6")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_hh6l5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_tj7vc"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -57,7 +66,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 2.0
+"speed": 1.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -77,10 +86,19 @@ animations = [{
 [resource]
 script = ExtResource("2_sg04k")
 name = "Classic"
+game_start_sound = ExtResource("5_tj7vc")
 life_texture = ExtResource("6_a1ex2")
-player_sprite_frames = SubResource("SpriteFrames_hh6l5")
+player_sprite_frames = SubResource("SpriteFrames_tj7vc")
 player_allow_rotation = true
+player_pellet_sound = ExtResource("10_0molp")
+player_fruit_sound = ExtResource("9_xg7lm")
+player_power_up_sound = ExtResource("11_tj7vc")
+player_death_sound = ExtResource("10_57d00")
+player_ghost_eat_sound = ExtResource("15_kkhh2")
 ghost_allow_flip = true
+ghost_normal_sound = ExtResource("8_qou22")
+ghost_frightened_sound = ExtResource("7_qou22")
+ghost_eaten_sound = ExtResource("6_qou22")
 chaser_sprite = ExtResource("2_4hhpk")
 ambusher_sprite = ExtResource("1_x5fb1")
 ignorant_sprite = ExtResource("4_0ogxo")

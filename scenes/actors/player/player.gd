@@ -12,6 +12,12 @@ const CELL_SIZE := 16
 @export_category("Maze")
 @export var maze: Maze
 
+var _pellet_sound: AudioStream
+var _fruit_sound: AudioStream
+var _power_up_sound: AudioStream
+var _ghost_eat_sound: AudioStream
+var _death_sound: AudioStream
+
 var _can_move := false
 var _screen_size := Vector2.ZERO
 var _allow_rotation := false
@@ -28,6 +34,7 @@ var _available_directions := {
 @onready var direction_sprite: Sprite2D = $Sprites/DirectionSprite
 @onready var two_step_ahead_marker: Marker2D = $Sprites/PlayerSprite/TwoStepAheadMarker
 @onready var four_step_ahead_marker: Marker2D = $Sprites/PlayerSprite/FourStepAheadMarker
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
@@ -74,6 +81,12 @@ func _setup() -> void:
 	var level_resource := GameManager.get_current_level_resource()
 	player_sprite.sprite_frames = level_resource.player_sprite_frames
 	_allow_rotation = level_resource.player_allow_rotation
+	
+	_pellet_sound = level_resource.player_pellet_sound
+	_fruit_sound = level_resource.player_fruit_sound
+	_power_up_sound = level_resource.player_power_up_sound
+	_ghost_eat_sound = level_resource.player_ghost_eat_sound
+	_death_sound = level_resource.player_death_sound
 
 
 func _process_movement(delta: float) -> void:
@@ -114,30 +127,67 @@ func _wrap_position() -> void:
 func _orient_sprite(new_direction: Vector2) -> void:
 	if _allow_rotation:
 		player_sprite.rotation = new_direction.angle()
+		player_sprite.flip_v = new_direction == Vector2.DOWN or new_direction == Vector2.LEFT
 		return
 	
 	player_sprite.flip_h = new_direction == Vector2.LEFT
+
+
+func reset(start_position: Vector2) -> void:
+	position = start_position
+	_can_move = false
+	_direction = Vector2.RIGHT
+	_next_direction = _direction
+	
+	player_sprite.rotation = 0.0
+	player_sprite.flip_h = false
+	player_sprite.flip_v = false
+	player_sprite.stop()
+	player_sprite.frame = 0
+	direction_sprite.rotation = 0.0
+	
+	audio_stream_player.stop()
+	show()
+	_determine_speed()
 
 
 func _die() -> void:
 	_can_move = false
 	
 	player_sprite.play("death")
+	audio_stream_player.stream = _death_sound
+	audio_stream_player.play()
 	await player_sprite.animation_finished
 	died.emit()
-	queue_free()
 
 
 func _determine_speed() -> void:
 	speed = GameConfig.get_player_speed()
 
 
+func _play_audio(edible: Edible) -> void:
+	if edible is PowerUp:
+		audio_stream_player.stream = _power_up_sound
+	elif edible is Fruit:
+		audio_stream_player.stream = _fruit_sound
+	else:
+		# Only allow pellet sound if not already playing a different stream
+		if not audio_stream_player.playing:
+			audio_stream_player.stream = _pellet_sound
+	
+	if not audio_stream_player.playing:
+		audio_stream_player.play()
+
+
 func _on_area_entered(edible: Area2D) -> void:
 	if edible is Edible:
+		_play_audio(edible)
 		edible.eat()
 	
 	if edible is Ghost:
 		if edible.is_in_state(Ghost.State.Frightened):
+			audio_stream_player.stream = _ghost_eat_sound
+			audio_stream_player.play()
 			edible.die()
 			return
 		

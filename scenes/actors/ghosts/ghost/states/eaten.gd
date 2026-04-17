@@ -48,6 +48,7 @@ func physics_update(_delta: float) -> void:
 func _respawn() -> void:
 	_respawning = true
 	ghost.position = _jail_coordinates
+	ghost.arrived_in_jail.emit()
 	await get_tree().create_timer(_respawn_timer).timeout
 	_start()
 

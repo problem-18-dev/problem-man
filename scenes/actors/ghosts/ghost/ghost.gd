@@ -1,7 +1,7 @@
 class_name Ghost
 extends Area2D
 
-
+signal arrived_in_jail
 signal eaten(ghost: Ghost)
 signal respawned(ghost: Ghost)
 
@@ -82,6 +82,15 @@ func navigate() -> void:
 	if position.distance_to(next_position) < current_speed / 100:
 		position = next_position
 		move_pointer += 1
+
+
+func reset() -> void:
+	_can_move = false
+	_position_to_spawn_cell()
+	reset_pathing()
+	reset_sprite()
+	_determine_speed()
+	state_machine.reset()
 
 
 func die() -> void:

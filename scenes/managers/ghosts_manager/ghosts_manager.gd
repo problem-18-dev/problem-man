@@ -2,6 +2,8 @@ class_name GhostsManager
 extends Node2D
 
 
+signal score_added(score: int)
+
 const EATEN_TIMERS: Array[int] = [3, 5, 7]
 
 @export_group("Debug")
@@ -9,6 +11,10 @@ const EATEN_TIMERS: Array[int] = [3, 5, 7]
 @export_group("Dependencies")
 @export var maze: Maze
 @export var player: Player
+
+var _normal_sound: AudioStream
+var _frightened_sound: AudioStream
+var _eaten_sound: AudioStream
 
 var _eaten_ghosts := 0
 var _score_multiplier := 1
@@ -18,10 +24,12 @@ var _score_multiplier := 1
 @onready var ambusher: Ambusher = $Ambusher
 @onready var fickle: Fickle = $Fickle
 @onready var ghosts := [chaser, ignorant, ambusher, fickle]
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
 	_prepare_ghosts()
+	_prepare_sounds()
 	
 	if ghost_nav_lines:
 		for ghost: Ghost in ghosts:
@@ -29,13 +37,24 @@ func _ready() -> void:
 
 
 func start_ghosts() -> void:
+	audio_stream_player.play()
 	for ghost: Ghost in ghosts:
 		ghost.start()
 
 
 func stop_ghosts() -> void:
+	audio_stream_player.stop()
 	for ghost: Ghost in ghosts:
 		ghost.stop()
+
+
+func reset_round() -> void:
+	audio_stream_player.stop()
+	_eaten_ghosts = 0
+	_score_multiplier = 1
+	for ghost: Ghost in ghosts:
+		ghost.reset()
+	audio_stream_player.stream = _normal_sound
 
 
 func cruise_elroy() -> void:
@@ -43,6 +62,9 @@ func cruise_elroy() -> void:
 
 
 func enter_frightened() -> void:
+	audio_stream_player.stream = _frightened_sound
+	audio_stream_player.play()
+	
 	for ghost: Ghost in ghosts:
 		if not ghost.is_in_state(Ghost.State.Eaten):
 			ghost.change_state(Ghost.State.Frightened)
@@ -56,6 +78,10 @@ func exit_frightened() -> void:
 	for ghost: Ghost in ghosts:
 		if not ghost.is_in_state(Ghost.State.Eaten):
 			ghost.change_state(new_state)
+	
+	# Normal sound
+	audio_stream_player.stream = _normal_sound
+	audio_stream_player.play()
 	
 	# Reset score multiplier when frigthened is fully over.
 	_score_multiplier = 1
@@ -81,16 +107,28 @@ func _prepare_ghosts() -> void:
 		ghost.player = player
 		ghost.eaten.connect(_on_ghost_eaten)
 		ghost.respawned.connect(_on_ghost_respawned)
+		ghost.arrived_in_jail.connect(_on_ghost_arrived_in_jail)
+
+
+func _prepare_sounds() -> void:
+	var level_resource := GameManager.get_current_level_resource()
+	_normal_sound = level_resource.ghost_normal_sound
+	_frightened_sound = level_resource.ghost_frightened_sound
+	_eaten_sound = level_resource.ghost_eaten_sound
+	audio_stream_player.stream = _normal_sound
 
 
 func _process_score(ghost: Ghost) -> int:
 	var score := ghost.BASE_SCORE * _score_multiplier
-	GameManager.add_score(score)
+	score_added.emit(score)
 	_score_multiplier *= 2
 	return score
 
 
 func _on_ghost_eaten(ghost: Ghost) -> void:
+	audio_stream_player.stream = _eaten_sound
+	audio_stream_player.play()
+	
 	var score := _process_score(ghost)
 	if ghost is Chaser:
 		ghost.change_state(Ghost.State.Eaten, { "score": score })
@@ -105,3 +143,9 @@ func _on_ghost_respawned(ghost: Ghost) -> void:
 		return
 	
 	_eaten_ghosts = max(0, _eaten_ghosts - 1)
+
+
+func _on_ghost_arrived_in_jail() -> void:
+	if GameManager.frightened_mode:
+		audio_stream_player.stream = _frightened_sound
+		audio_stream_player.play()

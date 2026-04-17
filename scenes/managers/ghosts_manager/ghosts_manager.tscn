@@ -9,6 +9,8 @@
 [node name="GhostsManager" type="Node2D" unique_id=470176556]
 script = ExtResource("1_es002")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=541019809]
+
 [node name="Chaser" parent="." unique_id=1086585638 instance=ExtResource("2_es002")]
 spawn_cell = 3
 

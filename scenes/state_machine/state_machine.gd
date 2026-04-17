@@ -22,6 +22,12 @@ func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
 
 
+func reset() -> void:
+	state.exit()
+	state = initial_state
+	state.enter()
+
+
 func transition_to_next_state(next_state: String, data := {}) -> void:
 	assert(has_node(next_state), "Transitioning to state %s, but it doesn't exist" % next_state)
 	

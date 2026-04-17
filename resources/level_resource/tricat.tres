@@ -5,7 +5,16 @@
 [ext_resource type="Script" uid="uid://bb3k3i47yuntn" path="res://resources/level_resource/level_resource.gd" id="1_sqqjd"]
 [ext_resource type="Texture2D" uid="uid://c2rvjsn0xqbbp" path="res://ui/hud/sprites/tricat.png" id="2_nhb7k"]
 [ext_resource type="Texture2D" uid="uid://bn7lbosal62vf" path="res://scenes/mazes/sprites/tricat_maze.png" id="2_sw83x"]
+[ext_resource type="AudioStream" uid="uid://b5c1nlqhbr45n" path="res://scenes/game/sounds/start.wav" id="2_unsio"]
+[ext_resource type="AudioStream" uid="uid://c3par75qlxt1f" path="res://scenes/actors/ghosts/sounds/classic_eaten.ogg" id="3_6xniy"]
+[ext_resource type="AudioStream" uid="uid://coovymsspvkb2" path="res://scenes/actors/player/sounds/tricat_eat_fruit.ogg" id="4_8j1g6"]
+[ext_resource type="AudioStream" uid="uid://t0ocvhqotmhe" path="res://scenes/actors/player/sounds/tricat_eat_pellet.ogg" id="4_qh4hx"]
+[ext_resource type="AudioStream" uid="uid://b0olciow8pecy" path="res://scenes/actors/player/sounds/tricat_death.ogg" id="4_quxob"]
+[ext_resource type="AudioStream" uid="uid://c5wq0bdg1y10q" path="res://scenes/actors/ghosts/sounds/classic_frightened.ogg" id="4_sejc1"]
 [ext_resource type="Texture2D" uid="uid://buvjxjoa43vlw" path="res://scenes/edibles/power_up/sprites/collar.png" id="4_sw83x"]
+[ext_resource type="AudioStream" uid="uid://c7l0v4cfcgw3d" path="res://scenes/actors/ghosts/sounds/classic_normal.ogg" id="5_7346o"]
+[ext_resource type="AudioStream" uid="uid://cg32qs573x1n7" path="res://scenes/actors/player/sounds/tricat_eat_power_up.ogg" id="6_kinv7"]
+[ext_resource type="AudioStream" uid="uid://byvc476hnf6h2" path="res://scenes/actors/player/sounds/ghost_eat.wav" id="6_unsio"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_18c2j"]
 load_path = "res://.godot/imported/witch_pink.png-8783e5bcdce6619dc379b82a9544c685.ctex"
@@ -67,7 +76,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 2.0
+"speed": 1.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -87,9 +96,18 @@ animations = [{
 [resource]
 script = ExtResource("1_sqqjd")
 name = "Tricat"
+game_start_sound = ExtResource("2_unsio")
 life_texture = ExtResource("2_nhb7k")
 player_sprite_frames = SubResource("SpriteFrames_18c2j")
+player_pellet_sound = ExtResource("4_qh4hx")
+player_fruit_sound = ExtResource("4_8j1g6")
+player_power_up_sound = ExtResource("6_kinv7")
+player_death_sound = ExtResource("4_quxob")
+player_ghost_eat_sound = ExtResource("6_unsio")
 ghost_scale = 1.3
+ghost_normal_sound = ExtResource("5_7346o")
+ghost_frightened_sound = ExtResource("4_sejc1")
+ghost_eaten_sound = ExtResource("3_6xniy")
 chaser_sprite = SubResource("CompressedTexture2D_1xifw")
 ambusher_sprite = SubResource("CompressedTexture2D_18c2j")
 ignorant_sprite = SubResource("CompressedTexture2D_066we")

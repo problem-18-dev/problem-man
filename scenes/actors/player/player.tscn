@@ -52,7 +52,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 2.0
+"speed": 1.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -72,6 +72,8 @@ animations = [{
 [node name="Player" type="Area2D" unique_id=839305927 groups=["player"]]
 collision_mask = 6
 script = ExtResource("1_dovo2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1013924722]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1285943555]
 shape = SubResource("CircleShape2D_8afob")

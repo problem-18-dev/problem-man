@@ -28,6 +28,8 @@ general/default_playback_type.web=0
 NavigationManager="*uid://dt1u2n0bp2a1b"
 GameConfig="*uid://b816fv8yf0fdh"
 GameManager="*uid://cnu6xrngdvmvf"
+AudioManager="*uid://cuvi41dsnsu8s"
+ButtonAudioComponent="*uid://dvak7lpw4aeg3"
 
 [display]
 

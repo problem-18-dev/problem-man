@@ -7,10 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://cl1aufpmrh14m" path="res://scenes/actors/ghosts/fickle/sprites/bike_blue.png" id="3_nnffa"]
 [ext_resource type="Texture2D" uid="uid://cvi5yy51ofh3l" path="res://scenes/edibles/fruit/sprites/urinal.png" id="4_1jpln"]
 [ext_resource type="Texture2D" uid="uid://d1lh3ws1bs4f2" path="res://scenes/actors/ghosts/ignorant/sprites/bike_orange.png" id="4_oum3l"]
+[ext_resource type="AudioStream" uid="uid://b5c1nlqhbr45n" path="res://scenes/game/sounds/start.wav" id="5_4lvw2"]
 [ext_resource type="Texture2D" uid="uid://2ps7irvbvi6x" path="res://scenes/mazes/sprites/i_need_to_go_maze.png" id="6_1jpln"]
 [ext_resource type="Texture2D" uid="uid://hctt52vi375t" path="res://ui/hud/sprites/man.png" id="6_ols66"]
+[ext_resource type="AudioStream" uid="uid://c3par75qlxt1f" path="res://scenes/actors/ghosts/sounds/classic_eaten.ogg" id="6_y042u"]
 [ext_resource type="Texture2D" uid="uid://cwaaanq56qwj3" path="res://scenes/edibles/pellet/sprites/ball.png" id="6_ygr5m"]
+[ext_resource type="AudioStream" uid="uid://c5wq0bdg1y10q" path="res://scenes/actors/ghosts/sounds/classic_frightened.ogg" id="7_2jxk3"]
+[ext_resource type="AudioStream" uid="uid://c7l0v4cfcgw3d" path="res://scenes/actors/ghosts/sounds/classic_normal.ogg" id="8_eakxt"]
 [ext_resource type="Texture2D" uid="uid://d0sovxrlapab" path="res://scenes/edibles/power_up/sprites/urinal_open.png" id="8_ols66"]
+[ext_resource type="AudioStream" uid="uid://dn8ak4jfttldk" path="res://scenes/actors/player/sounds/i_need_to_go_death.ogg" id="10_wkvn1"]
+[ext_resource type="AudioStream" uid="uid://c7anvb3diav7h" path="res://scenes/actors/player/sounds/i_need_to_go_eat_fruit.ogg" id="11_08lif"]
+[ext_resource type="AudioStream" uid="uid://byvc476hnf6h2" path="res://scenes/actors/player/sounds/ghost_eat.wav" id="12_7l83i"]
+[ext_resource type="AudioStream" uid="uid://xmsnxnjtov68" path="res://scenes/actors/player/sounds/i_need_to_go_eat_pellet.ogg" id="13_rpfy1"]
+[ext_resource type="AudioStream" uid="uid://b844fugedloxp" path="res://scenes/actors/player/sounds/i_need_to_go_eat_power_up.ogg" id="14_y042u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w2p4p"]
 atlas = ExtResource("2_4uima")
@@ -40,7 +49,7 @@ region = Rect2(16, 0, 16, 16)
 atlas = ExtResource("2_4uima")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_w2p4p"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_3ktsw"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -57,7 +66,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"death",
-"speed": 2.0
+"speed": 1.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -77,12 +86,21 @@ animations = [{
 [resource]
 script = ExtResource("2_h3vbo")
 name = "I need to go"
+game_start_sound = ExtResource("5_4lvw2")
 life_texture = ExtResource("6_ols66")
 text_color = Color(0, 0, 0, 1)
-player_sprite_frames = SubResource("SpriteFrames_w2p4p")
+player_sprite_frames = SubResource("SpriteFrames_3ktsw")
 player_allow_rotation = true
+player_pellet_sound = ExtResource("13_rpfy1")
+player_fruit_sound = ExtResource("11_08lif")
+player_power_up_sound = ExtResource("14_y042u")
+player_death_sound = ExtResource("10_wkvn1")
+player_ghost_eat_sound = ExtResource("12_7l83i")
 ghost_allow_flip = true
 ghost_scale = 1.3
+ghost_normal_sound = ExtResource("8_eakxt")
+ghost_frightened_sound = ExtResource("7_2jxk3")
+ghost_eaten_sound = ExtResource("6_y042u")
 chaser_sprite = ExtResource("2_xq8rk")
 ambusher_sprite = ExtResource("1_o6v4x")
 ignorant_sprite = ExtResource("4_oum3l")

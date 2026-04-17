@@ -3,7 +3,7 @@ extends CanvasLayer
 
 const GO_DURATION := 2.5
 
-var _countdown := 3
+var _countdown := 4
 
 @onready var score_label: Label = $ScoreLabel
 @onready var message_label: Label = $MessageLabel
@@ -55,6 +55,8 @@ func change_game_countdown(seconds: int) -> void:
 	var new_text: String
 	
 	match seconds:
+		4:
+			new_text = "FOUR"
 		3:
 			new_text = "THREE"
 		2:

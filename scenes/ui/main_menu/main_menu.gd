@@ -6,12 +6,20 @@ extends Control
 @onready var background_timer: Timer = $BackgroundTimer
 @onready var title_label: Label = $TitleLabel
 @onready var high_score_label: Label = $HighScoreLabel
+@onready var ghost: Sprite2D = $Maze/Ghost
 
 
 func _ready() -> void:
 	var high_score := GameManager.get_high_score()
 	if high_score > 0:
 		high_score_label.text = "HIGH SCORE: " + str(high_score)
+	randomize_ghost_sprite()
+
+
+func randomize_ghost_sprite() -> void:
+	var level_type: GameConfig.LevelType = GameConfig.LEVEL_RESOURCES.keys().pick_random()
+	var ghost_sprite := GameConfig.LEVEL_RESOURCES[level_type].chaser_sprite
+	ghost.texture = ghost_sprite
 
 
 func _on_title_label_mouse_entered() -> void:
