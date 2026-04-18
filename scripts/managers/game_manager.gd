@@ -117,6 +117,7 @@ func reset() -> void:
 	current_phase = GameConfig.Phase.Scatter
 	previous_level_type = GameConfig.LevelType.Classic
 	current_level_type = GameConfig.LevelType.Classic
+	level_type_queue = []
 	frightened_mode = false
 	cruise_elroy = false
 
