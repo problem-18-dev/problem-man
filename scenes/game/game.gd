@@ -82,7 +82,7 @@ func _on_player_died() -> void:
 		await hud.show_message("GAME OVER", game_over_duration)
 		GameManager.save_high_score()
 		GameManager.reset()
-		get_tree().call_deferred("reload_current_scene")
+		GameManager.main.load_scene(Main.Scene.MainMenu)
 		return
 	
 	_reset_round()

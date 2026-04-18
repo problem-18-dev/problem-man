@@ -13,6 +13,8 @@ func _ready() -> void:
 	var high_score := GameManager.get_high_score()
 	if high_score > 0:
 		high_score_label.text = "HIGH SCORE: " + str(high_score)
+	else:
+		high_score_label.text = "ARROWS - MOVE\nP - PAUSE"
 	randomize_ghost_sprite()
 
 

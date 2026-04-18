@@ -13,6 +13,11 @@ func _ready() -> void:
 	_setup_label()
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact"):
+		go_to_next()
+
+
 func swap_sprite() -> void:
 	traveling_player.change_sprite_frames(_curr_level.player_sprite_frames)
 	traveling_player.play()

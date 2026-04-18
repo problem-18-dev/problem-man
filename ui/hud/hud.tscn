@@ -96,4 +96,22 @@ text = "FOUR"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ExitButton" type="Button" parent="." unique_id=725518888]
+process_mode = 3
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"PrimaryButton"
+text = "EXIT"
+
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_countdown_timer_timeout"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

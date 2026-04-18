@@ -18,6 +18,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(512, 128)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SkipLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_hsdtx"]
 resource_name = "transition"
@@ -51,6 +63,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(512, 128), Vector2(-64, 192), Vector2(-64, 384), Vector2(512, 320)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SkipLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(2.1666667, 2.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mkc18"]
 _data = {
@@ -80,22 +104,6 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="TravelLabel" type="Label" parent="." unique_id=1037673644]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -84.0
-offset_top = -18.0
-offset_right = 84.0
-offset_bottom = 18.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_type_variation = &"HeadingLabel"
-text = "Traveling to "
-
 [node name="StarParticles2D" type="CPUParticles2D" parent="." unique_id=1460556416]
 position = Vector2(224, 0)
 amount = 60
@@ -114,6 +122,38 @@ color = Color(0.3137255, 0.3137255, 0.6039216, 1)
 
 [node name="TravelingPlayer" parent="." unique_id=1857792821 instance=ExtResource("2_hsdtx")]
 position = Vector2(512, 128)
+
+[node name="TravelLabel" type="Label" parent="." unique_id=1037673644]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -18.0
+offset_right = 84.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"HeadingLabel"
+text = "Traveling to "
+
+[node name="SkipLabel" type="Label" parent="." unique_id=1323455310]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Space to skip"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1546130306]
 libraries/ = SubResource("AnimationLibrary_mkc18")

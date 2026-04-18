@@ -10,6 +10,7 @@ var _countdown := 4
 @onready var lives_container: HBoxContainer = $LivesContainer
 @onready var countdown_timer: Timer = $CountdownTimer
 @onready var overlay_rect: ColorRect = $OverlayRect
+@onready var exit_button: Button = $ExitButton
 
 
 func _ready() -> void:
@@ -44,11 +45,13 @@ func hide_message() -> void:
 func pause_game() -> void:
 	overlay_rect.show()
 	show_message("PAUSED")
+	_show_exit_button()
 
 
 func unpause_game() -> void:
 	overlay_rect.hide()
 	hide_message()
+	_hide_exit_button()
 
 
 func change_game_countdown(seconds: int) -> void:
@@ -78,6 +81,14 @@ func _setup_lives(level_resource: LevelResource) -> void:
 		life.texture = level_resource.life_texture
 
 
+func _show_exit_button() -> void:
+	exit_button.show()
+
+
+func _hide_exit_button() -> void:
+	exit_button.hide()
+
+
 func _on_countdown_timer_timeout() -> void:
 	_countdown -= 1
 	
@@ -87,3 +98,9 @@ func _on_countdown_timer_timeout() -> void:
 	
 	show_message("GO!", GO_DURATION)
 	countdown_timer.stop()
+
+
+func _on_exit_button_pressed() -> void:
+	get_tree().paused = false
+	GameManager.reset()
+	GameManager.main.load_scene(Main.Scene.MainMenu)

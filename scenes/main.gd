@@ -2,12 +2,13 @@ class_name Main
 extends Node
 
 
-enum Scene { MainMenu, Transition, Game }
+enum Scene { Splash, MainMenu, Transition, Game }
 
 @export_category("Scenes")
 @export var first_scene := Scene.Game
 
 var scenes := {
+	Scene.Splash: "res://ui/menus/splash/splash.tscn",
 	Scene.MainMenu: "res://scenes/ui/main_menu/main_menu.tscn",
 	Scene.Transition: "res://ui/menus/transition/transition.tscn",
 	Scene.Game: "res://scenes/game/game.tscn",
